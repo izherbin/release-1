@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="8px" height="4px" viewBox="0 0 8 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Rectangle</title>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="MARKET-BASE-1-v0_1-(Not-login)-(Tablet)" transform="translate(-222.000000, -220.000000)" fill="#FFFFFF">
-            <g id="Group-57" transform="translate(32.000000, 205.000000)">
-                <g id="Group" transform="translate(188.000000, 14.000000)">
-                    <polygon id="Rectangle" transform="translate(6.035534, 4.535534) rotate(45.000000) translate(-6.035534, -4.535534) " points="3.53553391 2.03553391 8.53553391 2.03553391 3.53553391 7.03553391"></polygon>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg height="4" viewBox="0 0 8 4" width="8" xmlns="http://www.w3.org/2000/svg"><path d="m3.53553391 2.03553391h5l-5 5z" fill="#fff" fill-rule="evenodd" transform="matrix(.70710678 .70710678 -.70710678 .70710678 2.974874 -3.93934)"/></svg>

@@ -19,8 +19,7 @@ const theme = createMuiTheme({
       dim: '#202020',
     },
     secondary: {
-      white: '#FCFFFF',
-      main: '#FCFFFF',
+      main: '#FFFFFF',
       gray: '#D2D8D8',
     },
     accent: '#00695C',
