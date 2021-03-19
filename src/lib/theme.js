@@ -15,89 +15,38 @@ const theme = createMuiTheme({
   // COLORS
   palette: {
     primary: {
-      main: '#202020',
-      dim: '#202020',
+      main: '#0A0D1C',
+      dim: '#17192D',
     },
     secondary: {
       main: '#FFFFFF',
       gray: '#D2D8D8',
     },
-    accent: '#00695C',
-    dim: '#26A69A',
-    red: '#EF4848',
-    bgc: '#00695C',
-    gray: '#F4FDFF',
-    border: '#EEEEEE',
+    accent: '#FF3854',
+    green: '#1EC78E',
+    green_light: '#0AEA83',
+    blue: '#286AF0',
+    blue_light: '#717FB0',
   },
   // FONTS
   typography: {
     fontFamily: 'Nunito Sans, sans-serif',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 400,
     htmlFontSize: 10,
     color: '#fff',
-    '@media (max-width: 960px)': {
-      fontSize: 13,
-    },
     h1: {
       fontSize: '6.8rem',
       lineHeight: '7.2rem',
       fontWeight: 800,
-      '@media (max-width: 960px)': {
-        fontSize: '5.1rem',
-
-        lineHeight: '5.3rem',
-      },
-      '@media (max-width: 600px)': {
-        fontSize: '3.4rem',
-        lineHeight: '3.6rem',
-      },
     },
     h2: {
-      fontSize: '4.2rem',
-      lineHeight: '4.8rem',
+      fontSize: '2rem',
+      lineHeight: '2rem',
       fontWeight: 600,
-      '@media (max-width: 960px)': {
-        fontSize: '3.3rem',
-        lineHeight: '3.8rem',
-      },
-      '@media (max-width: 600px)': {
-        fontSize: '2.3rem',
-        lineHeight: '2.5rem',
-      },
     },
-    h3: {
-      fontSize: '2.4rem',
-      lineHeight: 1.3,
-      fontWeight: 700,
-      '@media (max-width: 960px)': {
-        fontSize: '2rem',
-      },
-      '@media (max-width: 600px)': {
-        fontSize: '1.8rem',
-      },
-    },
-    h4: {
-      fontSize: '2.4rem',
-      lineHeight: 1.5,
-      fontWeight: 700,
-      '@media (max-width: 960px)': {
-        fontSize: '2rem',
-      },
-      '@media (max-width: 600px)': {
-        fontSize: '1.8rem',
-      },
-    },
-    h5: {
-      fontSize: '1.6rem',
-      lineHeight: 1.5,
-      fontWeight: 800,
-      '@media (max-width: 600px)': {
-        fontSize: '1.4rem',
-      },
-    },
-    subtitle1: {
-      fontSize: '1.2rem',
+    subtitle: {
+      fontSize: '0.8rem',
     },
   },
   // CUSTOM GLOBAL STYLES

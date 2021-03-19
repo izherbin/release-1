@@ -2,11 +2,15 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  container: {},
+  container: {
+    maxWidth: '949px',
+    margin: '0 auto',
+    padding: '24px',
+  },
 }));
 
-export const Template = () => {
+export const Template = ({ children }) => {
   const { container } = useStyles();
 
-  return <div className={container} />;
+  return <div className={container}>{children}</div>;
 };

@@ -21,9 +21,9 @@ class MyDocument extends Document {
           style={{
             height: '100%',
             width: '100%',
-            color: '#202020',
+            color: '#fff',
             padding: '0',
-            backgroundColor: '#00695C',
+            backgroundColor: '#0A0D1C',
           }}
         >
           <Main />
