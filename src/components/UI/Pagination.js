@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { usePagination } from 'hooks/usePagination';
 
 const useStyles = makeStyles(({ palette: { blue } }) => ({
   container: {
@@ -18,18 +19,34 @@ const useStyles = makeStyles(({ palette: { blue } }) => ({
       border: `1px solid ${blue}`,
     },
   },
+  selected: {
+    transition: ' 0.3s',
+    border: `1px solid ${blue}`,
+  },
 }));
 
 export const Pagination = ({}) => {
-  const { container, page } = useStyles();
-  const pages = [1, 2, 3, 4, 5];
+  const { container, page, selected } = useStyles();
+  const { isPages, curPage, pagesHandler, checkIfexist } = usePagination(20);
+  const checkIfSelected = (el) => (curPage === el ? selected : '');
 
   return (
     <div className={container}>
-      {pages.map((el, i) => (
-        <div className={page}>{i + 1}</div>
+      {curPage >= 5 && (
+        <span onClick={pagesHandler(-1)} style={{ cursor: 'pointer' }}>
+          назад
+        </span>
+      )}
+      {isPages.map((el) => (
+        <div className={`${page} ${checkIfSelected(el)}`} id={el} onClick={pagesHandler()}>
+          {el}
+        </div>
       ))}
-      далее
+      {checkIfexist(+1) && (
+        <span onClick={pagesHandler(1)} style={{ cursor: 'pointer' }}>
+          далее
+        </span>
+      )}
     </div>
   );
 };

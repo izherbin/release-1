@@ -30,7 +30,7 @@ export const SearchInputs = ({}) => {
         <div style={{ marginRight: '38px' }}>
           <Filter />
         </div>
-        <Button>Найти</Button>
+        <Button disableRipple>Найти</Button>
       </div>
     </Fragment>
   );

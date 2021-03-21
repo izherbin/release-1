@@ -7,8 +7,8 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
 }));
 
 export const TableEls = ({ sizes }) => {
-  const { container, item } = useStyles();
-  const content = [...new Array(20)].map((_, i) => {
+  const { container } = useStyles();
+  const content = [...new Array(20)].map(() => {
     return {
       name: 'Бизнес аналитика',
       volume: 1000000,
