@@ -31,10 +31,11 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
 
 export const TableEl = ({ data, sizes, index }) => {
   const { container, element, opacity60, opacity20 } = useStyles({ sizes, index });
+  const modData = `${data.name} ${index}`;
 
   const content = [
     <TableIndex index={index} />,
-    data.name,
+    modData,
     modPrice(data.volume),
     <TableGrowth data={data} />,
     data.season,

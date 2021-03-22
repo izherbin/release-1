@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 export const usePagination = (num) => {
   const [isNumber, setNumber] = useState(234);
   const [curPage, setCurPage] = useState(1);
+  const startPages = [1, 2, 3, 4, 5];
+  const [isPages, setPages] = useState(startPages);
 
-  const numberOfPages = [...new Array(isNumber)].filter((_, i) => i % num === 0);
-  const [isPages, setPages] = useState(numberOfPages.map((_, i) => i + 1).slice(0, 5));
+  const numberOfPages = [...new Array(isNumber)].filter((_, i) => i % num === 0).length;
 
-  const checkIfexist = (n) => curPage + n <= numberOfPages.length;
+  const checkIfexist = (n) => curPage + n <= numberOfPages;
 
   const twoBefore = [checkIfexist(-1) && curPage - 2, checkIfexist(-2) && curPage - 1].filter(
     (el) => el,
@@ -18,7 +19,7 @@ export const usePagination = (num) => {
   const current = checkIfexist(0) && curPage;
 
   useEffect(() => {
-    if (curPage < 5) return setPages([1, 2, 3, 4, 5]);
+    if (curPage < 5) return setPages(startPages);
 
     return setPages([...twoBefore, current, ...twoAfter]);
   }, [curPage]);
@@ -26,7 +27,6 @@ export const usePagination = (num) => {
   const pagesHandler = (n = false) => (e) => {
     const currentId = Number(e.target.id);
     if (!n) return setCurPage(currentId);
-    if (curPage + 1 < numberOfPages) return 1;
 
     return setCurPage(curPage + n);
   };
