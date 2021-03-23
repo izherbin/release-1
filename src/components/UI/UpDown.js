@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useOrderToggle } from 'hooks/useOrderToggle';
 
 const useStyles = makeStyles(({ palette: { secondary, blue } }) => ({
   container: {
@@ -8,20 +7,21 @@ const useStyles = makeStyles(({ palette: { secondary, blue } }) => ({
   },
   top: {
     transform: 'translate(0, -3px)',
-    fill: ({ isOrdered }) => (isOrdered === 1 ? blue : secondary.main),
+    fill: ({ isOrdered, index, isUp }) =>
+      isOrdered === `order${index}` && isUp ? blue : secondary.main,
   },
   bottom: {
     transform: 'rotate(180deg) translate(8px, -3px)',
-    fill: ({ isOrdered }) => (isOrdered === 2 ? blue : secondary.main),
+    fill: ({ isOrdered, index, isUp }) =>
+      isOrdered === `order${index}` && !isUp ? blue : secondary.main,
   },
 }));
 
-export const UpDown = ({}) => {
-  const { isOrdered, orderHandler } = useOrderToggle();
-  const { container, top, bottom } = useStyles({ isOrdered });
+export const UpDown = ({ index, isOrdered, orderHandler, isUp }) => {
+  const { container, top, bottom } = useStyles({ isOrdered, index, isUp });
 
   return (
-    <div className={container} onClick={orderHandler}>
+    <div className={container} onClick={orderHandler} id={`order${index}`}>
       <svg height="4" viewBox="0 0 8 4" width="8" className={top}>
         <path
           d="m3.53553391 2.03553391h5l-5 5z"

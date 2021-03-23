@@ -11,7 +11,8 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {
     display: 'flex',
     textAlign: 'center',
-    border: `1px solid ${primary.main}`,
+    borderBottom: `1px solid ${primary.main}`,
+    backgroundColor: primary.dim,
   },
   element: {
     display: 'flex',
@@ -50,9 +51,10 @@ export const TableEl = ({ data, sizes, index }) => {
   };
 
   return (
-    <div className={container}>
+    <div className={`${container} ${checkIndex()}`}>
       {content.map((el, i) => (
-        <div style={{ width: sizes[i] }} className={`${element} ${checkIndex()}`}>
+        // <div style={{ width: sizes[i] }} className={`${element} ${checkIndex()}`}>
+        <div style={{ width: sizes[i] }} className={`${element}`}>
           {el}
         </div>
       ))}

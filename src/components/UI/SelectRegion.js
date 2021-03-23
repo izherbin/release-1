@@ -39,7 +39,7 @@ export const SelectRegion = ({}) => {
     <div className={container} onMouseEnter={toggleHandler} onMouseLeave={toggleHandler}>
       <div>Регион запуска бизнеса</div>
       <div className={icon}>
-        <img src="icons/down.svg" alt="" />
+        <img src="icons/down.svg" style={{ transform: 'rotate(-90deg)' }} />
       </div>
       <Fade in={isToggle}>
         <div className={dropDown}>{isToggle && <DropDown />}</div>

@@ -16,8 +16,8 @@ export const TableAnomaly = ({ data }) => {
   return (
     <Fragment>
       <span className={green}>{`${data.anomaly[0]} `}</span>
-      <span> / </span>
-      <span className={red}>{` ${data.anomaly[1]}`}</span>
+      <span style={{ margin: '0 8px' }}>/</span>
+      <span className={red}>{`${data.anomaly[1]}`}</span>
     </Fragment>
   );
 };

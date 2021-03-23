@@ -9,7 +9,7 @@ const useStyles = makeStyles(({ palette: { primary, blueLight } }) => ({
     justifyContent: 'center',
     textAlign: 'center',
     userSelect: 'none',
-    border: `1px solid ${primary.main}`,
+    borderRight: `1px solid ${primary.main}`,
     width: ({ sizes, index }) => `${sizes[index]}px`,
   },
   left: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(({ palette: { primary, blueLight } }) => ({
   },
 }));
 
-export const TableHeaderEl = ({ name, sizes, index }) => {
+export const TableHeaderEl = ({ name, sizes, index, isOrdered, orderHandler, isUp }) => {
   const { container, left, text, right } = useStyles({ sizes, index });
 
   return (
@@ -43,7 +43,7 @@ export const TableHeaderEl = ({ name, sizes, index }) => {
       </div>
       {index !== 0 && (
         <div className={right}>
-          <UpDown />
+          <UpDown index={index} isOrdered={isOrdered} orderHandler={orderHandler} isUp={isUp} />
         </div>
       )}
     </div>

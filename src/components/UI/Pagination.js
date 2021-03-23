@@ -9,9 +9,13 @@ const useStyles = makeStyles(({ palette: { blue } }) => ({
     fontSize: '2rem',
   },
   page: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     cursor: 'pointer',
-    marginRight: '16px',
-    padding: '10px 14px',
+    marginRight: '4px',
+    width: '40px',
+    height: '40px',
     border: '1px solid transparent',
     borderRadius: '4px',
     '&:hover': {
@@ -32,19 +36,14 @@ export const Pagination = ({}) => {
 
   return (
     <div className={container}>
-      {curPage >= 5 && (
-        <span onClick={pagesHandler(-1)} style={{ cursor: 'pointer' }}>
-          назад
-        </span>
-      )}
       {isPages.map((el) => (
         <div className={`${page} ${checkIfSelected(el)}`} id={el} onClick={pagesHandler()}>
           {el}
         </div>
       ))}
       {checkIfexist(+1) && (
-        <span onClick={pagesHandler(1)} style={{ cursor: 'pointer' }}>
-          далее
+        <span onClick={pagesHandler(1)} style={{ cursor: 'pointer', marginLeft: '12px' }}>
+          Далее
         </span>
       )}
     </div>

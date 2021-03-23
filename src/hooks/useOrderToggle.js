@@ -1,14 +1,16 @@
 import { useState } from 'react';
 
 export const useOrderToggle = () => {
-  const [isOrdered, setOrdered] = useState(0);
+  const [isOrdered, setOrdered] = useState(false);
+  const [isUp, setUp] = useState(true);
 
-  const orderHandler = () => {
-    if (!isOrdered) return setOrdered(1);
-    if (isOrdered === 1) return setOrdered(2);
+  const orderHandler = (e) => {
+    const { id } = e.currentTarget;
 
-    return setOrdered(1);
+    if (!isUp) return [setUp(true), setOrdered(id)];
+
+    return [setUp(false), setOrdered(id)];
   };
 
-  return { isOrdered, orderHandler };
+  return { isOrdered, orderHandler, isUp };
 };

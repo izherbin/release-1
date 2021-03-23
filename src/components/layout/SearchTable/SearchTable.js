@@ -6,7 +6,6 @@ import { TableEls } from 'components/layout/SearchTable/TableEls/TableEls';
 const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {
     borderRadius: '4px',
-    backgroundColor: primary.dim,
     marginBottom: '30px',
   },
 }));
