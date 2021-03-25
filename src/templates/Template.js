@@ -31,7 +31,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 }));
 
 export const Template = ({ children }) => {
-  const { isToggle, toggleHandler, setToggle, shadow } = useToggle();
+  const { isToggle, toggleHandler, setToggle } = useToggle();
   const { wholeContainer, container } = useStyles({ isToggle });
   const resetToggle = () => isToggle && setToggle(false);
 
