@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     position: 'relative',
     width: '100%',
-    marginRight: '31px',
   },
   icon: {
     position: 'absolute',

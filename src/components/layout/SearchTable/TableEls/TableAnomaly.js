@@ -1,7 +1,17 @@
-import React, { Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-const useStyles = makeStyles(({ palette: { accent, green } }) => ({
+const useStyles = makeStyles(({ palette: { accent, green }, breakpoints }) => ({
+  container: {
+    display: 'flex',
+    [breakpoints.down('md')]: {
+      display: 'block',
+    },
+    [breakpoints.down('sm')]: {
+      display: 'flex',
+    },
+  },
   green: {
     color: green,
   },
@@ -10,14 +20,16 @@ const useStyles = makeStyles(({ palette: { accent, green } }) => ({
   },
 }));
 
-export const TableAnomaly = ({ data }) => {
-  const { green, red } = useStyles();
+export const TableAnomaly = ({ data: { anomaly } }) => {
+  const { container, green, red } = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.only('md'));
 
   return (
-    <Fragment>
-      <span className={green}>{`${data.anomaly[0]} `}</span>
-      <span style={{ margin: '0 8px' }}>/</span>
-      <span className={red}>{`${data.anomaly[1]}`}</span>
-    </Fragment>
+    <div className={container}>
+      <div className={green}>{`${anomaly[0]} `}</div>
+      {!matches && <span style={{ margin: '0 8px' }}>/</span>}
+      <div className={red}>{`${anomaly[1]}`}</div>
+    </div>
   );
 };

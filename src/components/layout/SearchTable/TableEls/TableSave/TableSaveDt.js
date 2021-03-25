@@ -18,7 +18,7 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   },
 }));
 
-export const TableSave = ({}) => {
+export const TableSaveDt = ({}) => {
   const { container, shared, right } = useStyles();
 
   return (

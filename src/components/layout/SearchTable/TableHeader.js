@@ -10,6 +10,7 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
     height: '40px',
     borderRadius: '4px 4px 0 0',
     backgroundColor: primary.header,
+    borderBottom: `1px solid ${primary.main}`,
   },
 }));
 
@@ -32,6 +33,7 @@ export const TableHeader = ({ sizes }) => {
     <div className={container}>
       {elemetNames.map((el, i) => (
         <TableHeaderEl
+          key={`${i}header`}
           name={el}
           sizes={sizes}
           index={i}

@@ -4,10 +4,10 @@ import { TableIndex } from 'components/layout/SearchTable/TableEls/TableIndex';
 import { modPrice } from 'utils/modPrice';
 import { TableGrowth } from 'components/layout/SearchTable/TableEls/TableGrowth';
 import { TableAnomaly } from 'components/layout/SearchTable/TableEls/TableAnomaly';
-import { TableDifficulty } from 'components/layout/SearchTable/TableEls/TableDifficulty';
-import { TableSave } from 'components/layout/SearchTable/TableEls/TableSave';
+import { TableDifficulty } from 'components/layout/SearchTable/TableEls/TableDifficulity/TableDifficulty';
+import { TableSave } from 'components/layout/SearchTable/TableEls/TableSave/TableSave';
 
-const useStyles = makeStyles(({ palette: { primary } }) => ({
+const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
   container: {
     display: 'flex',
     textAlign: 'center',
@@ -19,7 +19,6 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     height: '40px',
-    whiteSpace: 'pre-wrap',
     borderRight: `1px solid ${primary.main}`,
   },
   opacity60: {
@@ -27,19 +26,26 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   },
   opacity20: {
     opacity: '0.2',
+    borderRadius: (index) => (index === 19 ? '0' : '0 0 4px 4px'),
+  },
+  seasonStyle: {
+    [breakpoints.down('md')]: {
+      fontSize: '0.8rem',
+    },
   },
 }));
 
 export const TableEl = ({ data, sizes, index }) => {
-  const { container, element, opacity60, opacity20 } = useStyles({ sizes, index });
+  const { container, element, opacity60, opacity20, seasonStyle } = useStyles({ sizes, index });
   const modData = `${data.name} ${index}`;
+  const season = <div className={seasonStyle}>{data.season}</div>;
 
   const content = [
     <TableIndex index={index} />,
     modData,
     modPrice(data.volume),
     <TableGrowth data={data} />,
-    data.season,
+    season,
     <TableAnomaly data={data} />,
     <TableDifficulty data={data} />,
     <TableSave />,
@@ -53,8 +59,7 @@ export const TableEl = ({ data, sizes, index }) => {
   return (
     <div className={`${container} ${checkIndex()}`}>
       {content.map((el, i) => (
-        // <div style={{ width: sizes[i] }} className={`${element} ${checkIndex()}`}>
-        <div style={{ width: sizes[i] }} className={`${element}`}>
+        <div style={{ width: sizes[i] }} className={`${element}`} key={`${i}table`}>
           {el}
         </div>
       ))}

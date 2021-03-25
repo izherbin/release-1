@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(({ palette: { blue, blueLight, secondary } }) => ({
+const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpoints }) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -15,10 +15,14 @@ const useStyles = makeStyles(({ palette: { blue, blueLight, secondary } }) => ({
     '&:hover': {
       transition: '0.3s',
       backgroundColor: '#2D80FF',
+      border: 'none',
     },
     '&:hover > *': {
       transition: '0.3s',
       fill: secondary.main,
+    },
+    [breakpoints.down('sm')]: {
+      borderRadius: '0 4px 4px 0',
     },
   },
   svg: {

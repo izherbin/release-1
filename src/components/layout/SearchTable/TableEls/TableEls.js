@@ -22,7 +22,7 @@ export const TableEls = ({ sizes }) => {
   return (
     <div className={container}>
       {content.map((el, i) => (
-        <TableEl data={el} index={i} sizes={sizes} />
+        <TableEl data={el} index={i} sizes={sizes} key={`${i}table`} />
       ))}
     </div>
   );

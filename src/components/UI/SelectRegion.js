@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useToggle } from 'hooks/useToggle';
 import { DropDown } from 'components/UI/DropDown/DropDown';
 import { Fade } from 'utils/transitions';
 
@@ -31,12 +30,11 @@ const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
   },
 }));
 
-export const SelectRegion = ({}) => {
-  const { isToggle, toggleHandler } = useToggle();
+export const SelectRegion = ({ isToggle, toggleHandler }) => {
   const { container, icon, dropDown } = useStyles(isToggle);
 
   return (
-    <div className={container} onMouseEnter={toggleHandler} onMouseLeave={toggleHandler}>
+    <div className={container} onClick={toggleHandler}>
       <div>Регион запуска бизнеса</div>
       <div className={icon}>
         <img src="icons/down.svg" style={{ transform: 'rotate(-90deg)' }} />

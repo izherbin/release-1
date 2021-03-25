@@ -6,12 +6,12 @@ const useStyles = makeStyles(({ palette: { secondary, blue } }) => ({
     display: 'flex',
   },
   top: {
-    transform: 'translate(0, -3px)',
+    transform: 'translate(0, 1px)',
     fill: ({ isOrdered, index, isUp }) =>
       isOrdered === `order${index}` && isUp ? blue : secondary.main,
   },
   bottom: {
-    transform: 'rotate(180deg) translate(8px, -3px)',
+    transform: 'rotate(180deg) translate(8px, -6px)',
     fill: ({ isOrdered, index, isUp }) =>
       isOrdered === `order${index}` && !isUp ? blue : secondary.main,
   },
