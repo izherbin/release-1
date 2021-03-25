@@ -9,7 +9,7 @@ const transitionStyles = {
 };
 
 export const Fade = ({ in: inProp, children, dur }) => {
-  const duration = dur || 500;
+  const duration = dur || 100;
 
   const defaultStyle = {
     // display: 'flex',

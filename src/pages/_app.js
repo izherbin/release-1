@@ -18,7 +18,7 @@ class MyApp extends App {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-          <Component {...pageProps} />
+        <Component {...pageProps} />
       </ThemeProvider>
     );
   }

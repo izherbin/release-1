@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>↳ ✏️ Value</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="10" height="10" rx="5"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MARKET-BASE-1-v0_1-(Not-login)-(DesktopHD)" transform="translate(-531.000000, -221.000000)">
+            <g id="Group-8" transform="translate(246.000000, 205.000000)">
+                <g id="↳-✏️-Value" transform="translate(285.000000, 16.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill-opacity="0.4" fill="#717FB0" xlink:href="#path-1"></use>
+                    <path d="M5.6640625,3.234375 L5.6640625,2.20703125 L4.53515625,2.20703125 L4.53515625,3.234375 L5.6640625,3.234375 Z M5.6640625,8 L5.6640625,3.7421875 L4.53515625,3.7421875 L4.53515625,8 L5.6640625,8 Z" id="i" fill="#0A0D1C" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

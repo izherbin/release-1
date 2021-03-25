@@ -1,0 +1,62 @@
+import React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { usePagination } from 'hooks/usePagination';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '2rem',
+    [breakpoints.down('sm')]: {
+      justifyContent: 'center',
+    },
+  },
+  page: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    marginRight: '4px',
+    width: '40px',
+    height: '40px',
+    border: '1px solid transparent',
+    borderRadius: '4px',
+    '&:hover': {
+      transition: ' 0.3s',
+      border: `1px solid ${blue}`,
+    },
+  },
+  selected: {
+    transition: ' 0.3s',
+    border: `1px solid ${blue}`,
+  },
+}));
+
+export const Pagination = ({}) => {
+  const { container, page, selected } = useStyles();
+  const { isPages, curPage, pagesHandler, checkIfexist } = usePagination(20);
+  const checkIfSelected = (el) => (curPage === el ? selected : '');
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+
+  return (
+    <div className={container}>
+      {isPages.map((el, i) => (
+        <div
+          className={`${page} ${checkIfSelected(el)}`}
+          id={el}
+          onClick={pagesHandler()}
+          key={`${i}pagination`}
+        >
+          {el}
+        </div>
+      ))}
+      {!matches && checkIfexist(+1) && (
+        <span onClick={pagesHandler(1)} style={{ cursor: 'pointer', marginLeft: '12px' }}>
+          Далее
+        </span>
+      )}
+    </div>
+  );
+};

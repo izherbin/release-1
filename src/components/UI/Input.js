@@ -2,69 +2,55 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-const useStyles = makeStyles(({ palette: { brown, accent, border }, breakpoints }) => ({
-  inputLabel: {
-    transform: 'translate(14px, 12px) scale(1)',
-    filter: 'brightness(1.75)',
-    color: '#4B4B55',
-    fontSize: '18px',
-    [breakpoints.down('sm')]: {
-      color: '#4B4B55',
-      fontSize: '12px',
-      transform: 'translate(10px, 15px) scale(1)',
-    },
-  },
-  shrink: {
-    backgroundColor: 'white',
-    transform: 'translate(10px, -8px) scale(0.75)!important',
-    padding: '4px',
-    borderRadius: '8px',
-    [breakpoints.down('sm')]: {
-      fontSize: '16px',
-    },
-  },
+const useStyles = makeStyles(({ palette: { blueLight, secondary } }) => ({
   input: {
-    padding: '10px 14px',
-    borderRadius: '14px!important',
-    border: `1px solid ${border}`,
+    width: ({ width }) => width,
+    padding: ({ isAdornment }) => (isAdornment ? '11px 15px 11px 44px' : '10px 15px'),
+    color: secondary.main,
+    borderRadius: '4px!important',
+    border: `1px solid ${blueLight}`,
+    '&::placeholder': {
+      color: secondary.main,
+      opacity: '1',
+      transform: 'translateY(1px)',
+      fontSize: '1.2rem',
+    },
   },
   notchedOutline: {
     border: 'none',
-    borderRadius: '8px',
   },
-  focused: {},
   root: {
-    top: '0.2px',
-    width: '100%',
-    '&:hover $notchedOutline': {
-      borderColor: accent,
-    },
-    '&$focused > $notchedOutline': {
-      borderColor: accent,
-    },
+    width: ({ width }) => width,
+    maxHeight: '40px',
+    alignItems: 'center',
   },
 }));
 
 export const Input = ({
   id,
-  label,
   defaultV,
   inputHandler,
   onKeyUp,
   length,
-  required = false,
-  rows = 0,
   value,
-  isShrink,
-  name = '',
-  multiline = false,
   textMask,
   onBlur,
   onFocus,
   autoFocus,
+  placeholder,
+  isAdornment = false,
+  required = false,
+  rows = 0,
+  name = '',
+  multiline = false,
+  isShrink = false,
   type = 'text',
+  width = 'auto',
 }) => {
-  const { inputLabel, notchedOutline, focused, input, root, shrink } = useStyles({});
+  const { inputLabel, notchedOutline, focused, input, root, shrink } = useStyles({
+    width,
+    isAdornment,
+  });
   const onChangeFunc = (e) => inputHandler(type)(e);
 
   const inputStyle = {
@@ -96,7 +82,6 @@ export const Input = ({
     <TextField
       multiline={multiline}
       id={id}
-      label={label}
       defaultValue={defaultV}
       required={required}
       rows={rows}
@@ -104,6 +89,7 @@ export const Input = ({
       autoFocus={autoFocus}
       type={type}
       key={id}
+      placeholder={placeholder}
       {...inputStyle}
     />
   );

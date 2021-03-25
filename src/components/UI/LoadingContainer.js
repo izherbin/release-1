@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { LoadingIndicator } from 'components/UI/LoadingIndicator/LoadingIndicator';
+import { LoadingIndicator } from 'components/UI/LoadingIndicator';
 
 const useStyles = makeStyles(() => ({
   container: {
