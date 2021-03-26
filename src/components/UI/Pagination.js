@@ -8,6 +8,7 @@ const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
     display: 'flex',
     alignItems: 'center',
     fontSize: '2rem',
+    userSelect: 'none',
     [breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
