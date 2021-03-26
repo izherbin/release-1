@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { Search } from 'components/UI/Search';
 import { SelectRegion } from 'components/UI/SelectRegion';
 import { Filter } from 'components/UI/Filter';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useMedia } from 'hooks/useMedia';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   container: {
@@ -22,8 +22,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 
 export const SearchDesktop = ({ isToggle, toggleHandler }) => {
   const { container, search } = useStyles();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const { matchesTablet } = useMedia();
 
   return (
     <Fragment>
@@ -32,7 +31,7 @@ export const SearchDesktop = ({ isToggle, toggleHandler }) => {
           <Search />
         </div>
         <div style={{ marginRight: '30px' }}>
-          {!matches && <SelectRegion toggleHandler={toggleHandler} isToggle={isToggle} />}
+          {!matchesTablet && <SelectRegion toggleHandler={toggleHandler} isToggle={isToggle} />}
         </div>
         <div style={{ marginRight: '38px' }}>
           <Filter />

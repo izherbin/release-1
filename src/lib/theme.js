@@ -2,6 +2,15 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 768,
+      md: 1024,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   spacing: 8,
   shadow: {
     primary: '0 2px 6px 0 rgba(0,0,0,0.50)',

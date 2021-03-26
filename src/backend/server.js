@@ -42,8 +42,9 @@ app.get('/regions', async (req, res) => {
   const getData = await getRegions();
 
   console.log('getData', getData);
-  // const response = res.send(getRegions);
-  // return response;
+  const response = res.send(getData);
+
+  return response;
 });
 
 app.listen(port);

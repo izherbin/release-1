@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { usePagination } from 'hooks/usePagination';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useMedia } from 'hooks/useMedia';
 
 const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
   container: {
@@ -38,8 +38,7 @@ export const Pagination = ({}) => {
   const { container, page, selected } = useStyles();
   const { isPages, curPage, pagesHandler, checkIfexist } = usePagination(20);
   const checkIfSelected = (el) => (curPage === el ? selected : '');
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const { matchesMobile } = useMedia();
 
   return (
     <div className={container}>
@@ -53,7 +52,7 @@ export const Pagination = ({}) => {
           {el}
         </div>
       ))}
-      {!matches && checkIfexist(+1) && (
+      {!matchesMobile && checkIfexist(+1) && (
         <span onClick={pagesHandler(1)} style={{ cursor: 'pointer', marginLeft: '12px' }}>
           Далее
         </span>
