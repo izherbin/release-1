@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const regions = require('./models/regions');
 
-export const corsOptions = {
+const corsOptions = {
   origin: ['localhost', '45.80.71.95'],
 };
 
