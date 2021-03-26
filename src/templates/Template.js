@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Header } from 'components/layout/Header';
 import { SearchInputs } from 'components/layout/SearchInputs/SearchInputs';
 import { useToggle } from 'hooks/useToggle';
+import { useFetchData } from 'hooks/useFetchData';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   wholeCongtainer: {},
@@ -34,6 +35,8 @@ export const Template = ({ children }) => {
   const { isToggle, toggleHandler, setToggle } = useToggle();
   const { wholeContainer, container } = useStyles({ isToggle });
   const resetToggle = () => isToggle && setToggle(false);
+  const { isData } = useFetchData();
+  console.log('Template -> isData', isData);
 
   return (
     <div className={wholeContainer} onClick={resetToggle}>

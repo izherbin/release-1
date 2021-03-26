@@ -6,7 +6,6 @@ import { SearchMobile } from 'components/layout/SearchInputs/SearchMobile';
 import { SearchDesktop } from 'components/layout/SearchInputs/SearchDesktop';
 
 export const SearchInputs = ({ isToggle, toggleHandler }) => {
-  console.log('SearchInputs -> isToggle', isToggle);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
