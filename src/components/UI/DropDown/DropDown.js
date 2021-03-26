@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DropElement } from 'components/UI/DropDown/DropElement';
@@ -33,7 +34,19 @@ const useStyles = makeStyles(({ palette: { primary, blueLight }, shadow }) => ({
 
 export const DropDown = ({ isData = [], selectHandler }) => {
   const { container, title, content } = useStyles();
-  const filteredRussia = isData && isData.filter((el) => el.country === 'Россия');
+  const filteredRussia =
+  isData &&
+  isData
+  .filter((el) => el.country === 'Россия')
+  .map((el) => {
+    if (el.name === "" && el.country === 'Россия') return el = {
+      name: 'Вся Россия',
+      country: 'Россия'
+    };
+    
+    return el;
+  });
+  console.log("DropDown -> filteredRussia", filteredRussia)
   const filteredCountries = isData && isData.filter((el) => el.country !== 'Россия');
   const russia = { country: 'Россия' };
   const { isToggle, toggleHandler } = useToggle();
