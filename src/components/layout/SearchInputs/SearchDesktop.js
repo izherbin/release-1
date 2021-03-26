@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { Search } from 'components/UI/Search';
@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-export const SearchDesktop = ({ isToggle, toggleHandler }) => {
+export const SearchDesktop = ({ isData }) => {
   const { container, search } = useStyles();
   const { matchesTablet } = useMedia();
 
@@ -31,7 +31,7 @@ export const SearchDesktop = ({ isToggle, toggleHandler }) => {
           <Search />
         </div>
         <div style={{ marginRight: '30px' }}>
-          {!matchesTablet && <SelectRegion toggleHandler={toggleHandler} isToggle={isToggle} />}
+          {!matchesTablet && <SelectRegion isData={isData} />}
         </div>
         <div style={{ marginRight: '38px' }}>
           <Filter />

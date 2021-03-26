@@ -11,7 +11,7 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   },
 }));
 
-export const SearchTable = () => {
+export const SearchTable = ({ isData }) => {
   const { container } = useStyles();
   const { matchesTablet } = useMedia();
 
@@ -25,7 +25,7 @@ export const SearchTable = () => {
 
   return (
     <div className={container}>
-      <TableHeader sizes={allSizesHeader} />
+      <TableHeader sizes={allSizesHeader} isData={isData} />
       <TableEls sizes={allSizesTable} />
     </div>
   );

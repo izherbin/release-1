@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DropDown } from 'components/UI/DropDown/DropDown';
 import { Fade } from 'utils/transitions';
+import { ToggleContext } from 'components/state/context/toggle-context';
 
 const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
   container: {
@@ -30,17 +31,31 @@ const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
   },
 }));
 
-export const SelectRegion = ({ isToggle, toggleHandler }) => {
-  const { container, icon, dropDown } = useStyles(isToggle);
+export const SelectRegion = ({ isData }) => {
+  const {
+    toggleState: { toggled },
+    dispatch,
+  } = useContext(ToggleContext);
+  const { container, icon, dropDown } = useStyles(toggled);
+  const toggleHandler = () => dispatch({});
+
+  const [isSelected, setSelected] = useState('Регион запуска бизнеса');
+  const selectHandler = (e) => {
+    const content = e.target.id;
+
+    return setSelected(content);
+  };
 
   return (
     <div className={container} onClick={toggleHandler}>
-      <div>Регион запуска бизнеса</div>
+      <div>{isSelected}</div>
       <div className={icon}>
         <img src="icons/down.svg" style={{ transform: 'rotate(-90deg)' }} />
       </div>
-      <Fade in={isToggle}>
-        <div className={dropDown}>{isToggle && <DropDown />}</div>
+      <Fade in={toggled}>
+        <div className={dropDown}>
+          {toggled && <DropDown isData={isData} selectHandler={selectHandler} />}
+        </div>
       </Fade>
     </div>
   );

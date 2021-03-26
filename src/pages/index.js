@@ -9,14 +9,13 @@ import { useFetchData } from 'hooks/useFetchData';
 const Index = () => {
   const { matchesMobile } = useMedia();
   const { isData, isLoading } = useFetchData();
-  console.log('Index -> isData', isData);
 
   const search = (props) =>
     matchesMobile
       ? [<SearchTableMobile {...props} />, <Pagination />]
-      : [<SearchTable {...props} />, <Pagination />];
+      : [<SearchTable {...props} isData={isData} />, <Pagination />];
 
-  return <Template>{(props) => search(props)}</Template>;
+  return <Template isData={isData}>{(props) => search(props)}</Template>;
 };
 
 export default Index;
