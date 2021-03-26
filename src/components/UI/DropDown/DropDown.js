@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DropElement } from 'components/UI/DropDown/DropElement';
+import { useToggle } from 'hooks/useToggle';
 
 const useStyles = makeStyles(({ palette: { primary, blueLight }, shadow }) => ({
   container: {
@@ -30,15 +31,37 @@ const useStyles = makeStyles(({ palette: { primary, blueLight }, shadow }) => ({
   },
 }));
 
-export const DropDown = ({}) => {
+export const DropDown = ({ isData = [], selectHandler }) => {
   const { container, title, content } = useStyles();
+  const filteredRussia = isData && isData.filter((el) => el.country === 'Россия');
+  const filteredCountries = isData && isData.filter((el) => el.country !== 'Россия');
+  const russia = { country: 'Россия' };
+  const { isToggle, toggleHandler } = useToggle();
+
+  const data = filteredRussia.map((el, i) => (
+    <DropElement
+      index={i}
+      object={el}
+      russia
+      selectHandler={selectHandler}
+      handler={toggleHandler}
+    />
+  ));
 
   return (
     <div className={container}>
       <div className={title}>Регион запуска бизнеса</div>
       <div className={content}>
-        {[...new Array(14)].map((_, i) => (
-          <DropElement index={i} />
+        <DropElement
+          object={russia}
+          handler={toggleHandler}
+          first
+          isToggle={isToggle}
+          selectHandler={selectHandler}
+        />
+        {isToggle && data}
+        {filteredCountries.map((el) => (
+          <DropElement handler={toggleHandler} object={el} selectHandler={selectHandler} />
         ))}
       </div>
     </div>

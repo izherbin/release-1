@@ -4,7 +4,7 @@ import { SearchMobile } from 'components/layout/SearchInputs/SearchMobile';
 import { SearchDesktop } from 'components/layout/SearchInputs/SearchDesktop';
 import { useMedia } from 'hooks/useMedia';
 
-export const SearchInputs = ({ isToggle, toggleHandler }) => {
+export const SearchInputs = ({ isData }) => {
   const { matchesMobile } = useMedia();
 
   return (
@@ -13,7 +13,7 @@ export const SearchInputs = ({ isToggle, toggleHandler }) => {
         База ниш
       </Typography>
       {matchesMobile && <SearchMobile />}
-      {!matchesMobile && <SearchDesktop toggleHandler={toggleHandler} isToggle={isToggle} />}
+      {!matchesMobile && <SearchDesktop isData={isData} />}
     </Fragment>
   );
 };

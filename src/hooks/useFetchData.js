@@ -29,9 +29,7 @@ export const useFetchData = () => {
     try {
       // const token = cookiesGet('token_salary');
       const req = await fetch(URL);
-      console.log('useFetchData -> req', req);
       const json = await req.json();
-      console.log('useFetchData -> json', json);
 
       setData(json);
     } catch (error) {

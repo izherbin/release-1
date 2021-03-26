@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Header } from 'components/layout/Header';
 import { SearchInputs } from 'components/layout/SearchInputs/SearchInputs';
-import { useToggle } from 'hooks/useToggle';
-import { useFetchData } from 'hooks/useFetchData';
+import { ToggleContext } from 'components/state/context/toggle-context';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   wholeCongtainer: {},
@@ -31,12 +30,16 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-export const Template = ({ children }) => {
-  const { isToggle, toggleHandler, setToggle } = useToggle();
-  const { wholeContainer, container } = useStyles({ isToggle });
-  const resetToggle = () => isToggle && setToggle(false);
-  const { isData } = useFetchData();
-  console.log('Template -> isData', isData);
+export const Template = ({ children, isData }) => {
+  const {
+    toggleState: { toggled },
+    dispatch,
+  } = useContext(ToggleContext);
+  const { wholeContainer, container } = useStyles({ toggled });
+  const resetToggle = (e) => {
+    const target = e.target.id;
+    if (!target.includes('Россия')) return toggled && dispatch({ initial: 'reset' });
+  };
 
   return (
     <div className={wholeContainer} onClick={resetToggle}>
@@ -45,7 +48,7 @@ export const Template = ({ children }) => {
           <Header />
         </div>
         <div style={{ marginBottom: '40px' }}>
-          <SearchInputs toggleHandler={toggleHandler} isToggle={isToggle} />
+          <SearchInputs isData={isData} />
         </div>
         {children()}
       </div>
