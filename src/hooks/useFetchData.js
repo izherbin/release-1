@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 export const useFetchData = () => {
   const [isData, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const URL = '45.80.71.95:8280/regions';
+  const URL = 'http://45.80.71.95:8280/regions';
 
   // const {
   //   dispatch,
@@ -28,7 +28,7 @@ export const useFetchData = () => {
 
     try {
       // const token = cookiesGet('token_salary');
-      const req = await fetch(url);
+      const req = await fetch(URL);
       console.log('useFetchData -> req', req);
       const json = await req.json();
       console.log('useFetchData -> json', json);

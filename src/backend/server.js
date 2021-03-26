@@ -1,7 +1,13 @@
 /* eslint-disable import/extensions, import/no-extraneous-dependencies */
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const regions = require('./models/regions');
+
+export const corsOptions = {
+  origin: ['localhost', '45.80.71.95'],
+};
+
 // const db = require('./db');
 
 const MONGO_USERNAME = 'izherbin';
@@ -30,10 +36,11 @@ const getRegions = async function () {
 };
 
 const app = express();
+app.use(cors());
 
 const port = process.env.PORT || 8280;
 
-app.get('/regions', async (req, res) => {
+app.get('/regions', cors(corsOptions), async (req, res) => {
   await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then(
     () => console.log('Есть соединение...'),
     (err) => console.log('Ошибка соединения: ', err),
