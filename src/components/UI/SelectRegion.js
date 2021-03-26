@@ -26,7 +26,7 @@ const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
   dropDown: {
     position: 'absolute',
     left: '-1px',
-    top: '39px',
+    top: '53px',
   },
 }));
 

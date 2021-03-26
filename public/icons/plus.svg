@@ -1,1 +1,16 @@
-<svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><mask id="a" fill="#fff"><path d="m0 0h32v32h-32z" fill="#fff" fill-rule="evenodd"/></mask><g fill="none" fill-rule="evenodd" stroke="#fff" stroke-linecap="round" stroke-width="2"><path d="m16.5 7v17" mask="url(#a)"/><path d="m16.5 7v17" mask="url(#a)" transform="matrix(0 -1 1 0 1 32)"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="MARKET-BASE-1-v0_1-(Not-login)-(Tablet)" transform="translate(-635.000000, -256.000000)" stroke="#FFFFFF" stroke-width="2">
+            <g id="Group-57" transform="translate(32.000000, 205.000000)">
+                <g id="Group-56" transform="translate(0.000000, 41.000000)">
+                    <g id="Group" transform="translate(604.000000, 11.000000)">
+                        <line x1="8.5" y1="0" x2="8.5" y2="17" id="Path-4"></line>
+                        <line x1="8.5" y1="0" x2="8.5" y2="17" id="Path-4" transform="translate(8.500000, 8.500000) rotate(-90.000000) translate(-8.500000, -8.500000) "></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

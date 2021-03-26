@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 export const useFetchData = () => {
   const [isData, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const URL = 'localhost:8280/regions';
+  const URL = '45.80.71.95:8280/regions';
 
   // const {
   //   dispatch,
