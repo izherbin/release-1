@@ -5,22 +5,24 @@ import { SearchInputs } from 'components/layout/SearchInputs/SearchInputs';
 import { ToggleContext } from 'components/state/context/toggle-context';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
-  wholeCongtainer: {},
-  container: {
+  wholeCongtainer: {
     position: 'relative',
-    maxWidth: '949px',
+  },
+  container: {
+    width: '949px',
     margin: '0 auto',
     padding: '0 0 40px 0',
-    // '&:after': {
-    //   content: '""',
-    //   position: 'absolute',
-    //   width: '100%',
-    //   height: '100%',
-    //   color: '#fff',
-    //   opacity: '0.5',
-    //   left: '0',
-    //   top: '0',
-    // },
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      margin: '0 auto',
+      width: ({ toggled }) => (toggled ? '100vw' : '0%'),
+      height: ({ toggled }) => (toggled ? '140vh' : '0%'),
+      left: '0',
+      top: '0',
+      opacity: '0.6',
+      backgroundColor: '#000',
+    },
     [breakpoints.down('md')]: {
       maxWidth: '704px',
     },
@@ -38,7 +40,10 @@ export const Template = ({ children, isData }) => {
   const { wholeContainer, container } = useStyles({ toggled });
   const resetToggle = (e) => {
     const target = e.target.id;
-    if (!target.includes('Россия')) return toggled && dispatch({ initial: 'reset' });
+
+    if (target === 'Россия') return;
+
+    if (toggled) dispatch({ initial: 'reset' });
   };
 
   return (

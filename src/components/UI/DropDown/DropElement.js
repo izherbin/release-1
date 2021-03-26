@@ -53,8 +53,16 @@ export const DropElement = ({
   const { container, image } = useStyles({ russia, isToggle });
   const handlers = (e) => [handler(), selectHandler(e)];
 
+  const generateId = () => {
+    if (name === "") return country;
+    
+    return name;
+  
+  }
+
   return (
-    <div className={container} id={name === "" ? country : name } onClick={handlers}>
+    <div className={container} id={generateId()} onClick={handlers}>
+    {/* <div className={container} id={name === "" ? country : name } onClick={handlers}> */}
       {name || country}
       {first && <img src="icons/down.svg" className={image} />}
     </div>
