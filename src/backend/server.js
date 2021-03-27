@@ -7,8 +7,8 @@ import { corsOptions } from './config.js';
 
 export const countArray = () => getTableRows.length;
 export const searchBase = (exp) => getTableRows(exp);
-export const regionSort = (region) => getTableRows(_, region);
-export const dataSlice = (begin, end) => getTableRows(_, _, begin, end);
+export const regionSort = (region) => getTableRows(null, region);
+export const dataSlice = (begin, end) => getTableRows(null, null, begin, end);
 
 const app = express();
 app.use(cors());
