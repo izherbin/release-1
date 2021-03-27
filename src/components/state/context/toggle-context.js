@@ -8,11 +8,20 @@ const ToggleContextProvider = ({ children }) => {
     toggled: false,
   });
 
+  const resetToggle = (e) => {
+    const target = e.target.id;
+
+    if (target === 'Россия') return;
+
+    if (toggleState.toggled) dispatch({ initial: 'reset' });
+  };
+
   return (
     <ToggleContext.Provider
       value={{
         toggleState,
         dispatch,
+        resetToggle,
       }}
     >
       {children}

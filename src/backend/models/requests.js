@@ -1,6 +1,7 @@
-const { ObjectId } = require('mongodb');
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import mongo from 'mongodb';
 
+const { ObjectId } = mongo;
 const { Schema } = mongoose;
 
 const Requests = new Schema({
@@ -12,4 +13,5 @@ const Requests = new Schema({
   source: ObjectId, // Поисковик
   volumes: [Number], // Массив числа поисковых запросов по периодам, начиная с <lastperiod>
 });
-module.exports = mongoose.model('requests', Requests);
+
+export const requests = mongoose.model('requests', Requests);

@@ -1,28 +1,27 @@
-const db = require('./db');
-const requests = require('./models/requests');
+import { requests } from './models/requests.js';
+import { db } from './db.js';
 
 const MONTHS_IN_YEAR = 12;
 const COEFF_TREND_SURPLUS = 1.0;
 
-module.exports = async function getTableRows(expr, region, begin, end, sortkey, sortorder) {
+export const getTableRows = async function getTableRows(
+  expr,
+  region,
+  begin,
+  end,
+  sortkey,
+  sortorder,
+) {
   const searchniche = expr ? `^${expr}` : '.*';
   const searchreg = region || '.*';
 
   const filter = { nameniche: { $regex: searchniche }, namereg: { $regex: searchreg } };
-  // let arr = await requests.find(filter, (err) => {
-  //     if(err) {
-  //         console.log('Ошибка в запросах', err);
-  //     }
-  // });
   const arr = await requests
     .find(filter)
     .skip(begin)
     .limit(end - begin);
   const res = [];
   for (let i = 0; i < arr.length; i++) {
-    // let vol = sumLastYear(arr[i].volumes);
-    // let grwth = growthLastYear(arr[i].volumes);
-    // let trnd = trendSeason(arr[i].volumes, 2);
     res.push({
       number: i + 1,
       niche: arr[i].nameniche,

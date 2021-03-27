@@ -35,16 +35,9 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 export const Template = ({ children, isData }) => {
   const {
     toggleState: { toggled },
-    dispatch,
+    resetToggle,
   } = useContext(ToggleContext);
   const { wholeContainer, container } = useStyles({ toggled });
-  const resetToggle = (e) => {
-    const target = e.target.id;
-
-    if (target === 'Россия') return;
-
-    if (toggled) dispatch({ initial: 'reset' });
-  };
 
   return (
     <div className={wholeContainer} onClick={resetToggle}>
