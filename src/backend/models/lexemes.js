@@ -1,5 +1,4 @@
-const { ObjectId } = require('mongodb');
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -7,4 +6,5 @@ const Lexemes = new Schema({
   name: String,
   wordforms: mongoose.ObjectId,
 });
-module.exports = mongoose.model('lexemes', Lexemes);
+
+export const lexemes = mongoose.model('lexemes', Lexemes);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const MONGO_USERNAME = 'izherbin';
 const MONGO_PASSWORD = '22uF5EcHm9';

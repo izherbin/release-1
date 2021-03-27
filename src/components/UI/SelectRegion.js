@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DropDown } from 'components/UI/DropDown/DropDown';
 import { Fade } from 'utils/transitions';
 import { ToggleContext } from 'components/state/context/toggle-context';
+import { useRegionSelect } from 'hooks/useRegionSelect';
 
 const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
   container: {
@@ -38,13 +39,7 @@ export const SelectRegion = ({ isData }) => {
   } = useContext(ToggleContext);
   const { container, icon, dropDown } = useStyles(toggled);
   const toggleHandler = () => dispatch({});
-
-  const [isSelected, setSelected] = useState('Регион запуска бизнеса');
-  const selectHandler = (e) => {
-    const content = e.target.id;
-
-    return setSelected(content);
-  };
+  const { isSelected, selectHandler } = useRegionSelect();
 
   return (
     <div className={container} onClick={toggleHandler}>
