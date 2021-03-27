@@ -25,9 +25,9 @@ export const getTableRows = async function getTableRows(
     res.push({
       number: i + 1,
       niche: arr[i].nameniche,
-      volume: sumLastYear(arr[i].volumes),
-      growth: growthLastYear(arr[i].volumes),
-      trend: trendSeason(arr[i].volumes, 2),
+      // volume: sumLastYear(arr[i].volumes),
+      // growth: growthLastYear(arr[i].volumes),
+      // trend: trendSeason(arr[i].volumes, 2),
     });
   }
   return res;
