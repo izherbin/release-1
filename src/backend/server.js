@@ -41,7 +41,9 @@ app.get('/data', cors(corsOptions), async (req, res) => {
   };
   const [start, end] = pagesToSlice();
   const data = await getTableRows(search || null, region || null, start, end);
+  console.log('getTableRows.length', data.length);
   const length = await getTableLength(search || null, region || null);
+  console.log('length', length);
 
   // const getData = await getTableRows();
   const response = res.status(200).send([data, length]);

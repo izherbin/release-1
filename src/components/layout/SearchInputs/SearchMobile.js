@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SearchMobile = ({}) => {
+export const SearchMobile = ({ searchHandler }) => {
   const { container, filter } = useStyles();
 
   return (
     <div className={container}>
-      <Search />
+      <Search searchHandler={searchHandler} />
       <div className={filter}>
         <Filter />
       </div>
