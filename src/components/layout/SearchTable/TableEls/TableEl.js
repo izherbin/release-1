@@ -36,14 +36,15 @@ const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
 }));
 
 export const TableEl = ({ data, sizes, index }) => {
+  console.log('TableEl -> data', data);
   const { container, element, opacity60, opacity20, seasonStyle } = useStyles({ sizes, index });
-  const modData = `${data.name} ${index}`;
-  const season = <div className={seasonStyle}>{data.season}</div>;
+  const { niche, volume, trend } = data;
+  const season = <div className={seasonStyle}>{trend}</div>;
 
   const content = [
     <TableIndex index={index} />,
-    modData,
-    modPrice(data.volume),
+    niche,
+    modPrice(volume),
     <TableGrowth data={data} />,
     season,
     <TableAnomaly data={data} />,

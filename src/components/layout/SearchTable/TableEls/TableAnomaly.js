@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ palette: { accent, green }, breakpoints }) => ({
   },
 }));
 
-export const TableAnomaly = ({ data: { anomaly } }) => {
+export const TableAnomaly = ({ data: { anomaly = [10, 10] } }) => {
   const { container, green, red } = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.only('md'));
