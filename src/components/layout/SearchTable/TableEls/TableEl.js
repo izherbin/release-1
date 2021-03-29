@@ -26,7 +26,7 @@ const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
   },
   opacity20: {
     opacity: '0.2',
-    borderRadius: (index) => (index === 19 ? '0' : '0 0 4px 4px'),
+    borderRadius: (countLast) => (countLast ? '0 0 4px 4px' : '0'),
   },
   seasonStyle: {
     [breakpoints.down('md')]: {
@@ -35,14 +35,16 @@ const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
   },
 }));
 
-export const TableEl = ({ data, sizes, index }) => {
-  console.log('TableEl -> data', data);
-  const { container, element, opacity60, opacity20, seasonStyle } = useStyles({ sizes, index });
+export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
+  const countBeforeLast = arrLength === index + 2;
+  const countLast = arrLength === index + 1;
+  const { container, element, opacity60, opacity20, seasonStyle } = useStyles({ sizes, countLast });
   const { niche, volume, trend } = data;
+  const countNumber = isPage === 1 ? Number(isPage) + index : Number(isPage) * 10 + index + 1;
   const season = <div className={seasonStyle}>{trend}</div>;
 
   const content = [
-    <TableIndex index={index} />,
+    <TableIndex number={countNumber} />,
     niche,
     modPrice(volume),
     <TableGrowth data={data} />,
@@ -53,8 +55,8 @@ export const TableEl = ({ data, sizes, index }) => {
   ];
 
   const checkIndex = () => {
-    if (index === 18) return opacity60;
-    if (index === 19) return opacity20;
+    if (countBeforeLast) return opacity60;
+    if (countLast) return opacity20;
   };
 
   return (

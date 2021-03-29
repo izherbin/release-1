@@ -46,7 +46,7 @@ const useStyles = makeStyles(({ palette: { primary, blueLight, blue }, shadows }
   },
   content: {
     height: '40px',
-    width: '159px',
+    width: '100%',
     padding: '14px 16px',
     borderBottom: `1px solid ${primary.main}`,
   },

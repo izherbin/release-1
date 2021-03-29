@@ -5,30 +5,30 @@ export const useFetchData = () => {
   const [isRegion, setRegion] = useState(false);
   const [isSearch, setSearch] = useState(false);
   const [isPage, setPage] = useState(1);
+  const regionUrl = `${URL}/regions`;
   const defaultUrl = `${URL}/data?page=${isPage}&perPage=20`;
   const [isUrl, setUrl] = useState(defaultUrl);
 
   const [isLoading, setLoading] = useState(false);
 
   const [isData, setData] = useState([]);
-  // при клике передаем номер страницы из ID
-  // смотрим активен ли фильтр страна
-  // если активен, то вставляем его в конец урла
-  // смотрим активен ли фильтр по слову
   const pageHandler = (e) => {
     const { id } = e.target;
     setPage(id);
   };
 
   const regionHandler = (e) => {
-    const { id } = e.target;
-    setRegion(id);
+    setRegion(e);
   };
 
   const searchHandler = (e) => {
     const { value } = e.target;
     setSearch(value);
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [isRegion, isSearch]);
 
   useEffect(() => {
     const url = `${URL}/data?page=${isPage}&perPage=20`;
@@ -43,11 +43,12 @@ export const useFetchData = () => {
     setLoading(true);
 
     try {
-      const req = await fetch(isUrl);
-      const json = await req.json();
-      const [data, pages] = json;
+      const req = await Promise.all([fetch(isUrl), fetch(regionUrl)]);
 
-      setData(data);
+      const [data, regions] = await Promise.all(req.map((res) => res.json()));
+      // const [data, pages] = data;
+
+      setData({ data, regions });
     } catch (error) {
       console.log('error');
     }
@@ -55,5 +56,14 @@ export const useFetchData = () => {
     setLoading(false);
   }, [isUrl]);
 
-  return { isData, isLoading, pageHandler, regionHandler, searchHandler };
+  return {
+    isData,
+    isPage,
+    isSearch,
+    isRegion,
+    isLoading,
+    pageHandler,
+    regionHandler,
+    searchHandler,
+  };
 };

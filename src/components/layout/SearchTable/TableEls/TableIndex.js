@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-export const TableIndex = ({ index }) => {
+export const TableIndex = ({ number }) => {
   return (
     <Fragment>
-      {index < 9 && `0${index + 1}`}
-      {index >= 9 && `${index + 1}`}
+      {number <= 9 && `0${number}`}
+      {number > 9 && `${number}`}
     </Fragment>
   );
 };

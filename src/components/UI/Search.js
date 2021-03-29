@@ -17,13 +17,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Search = ({}) => {
+export const Search = ({ searchHandler }) => {
+  console.log('Search -> searchHandler', searchHandler);
   const { container, icon } = useStyles();
   const { isInputs, inputHandler } = useInputHandler();
   const { isClicked, clickHandler } = useHidePholder('Поиск по нишам');
 
   return (
-    <div onFocus={clickHandler} onBlur={clickHandler} className={container}>
+    <div
+      onFocus={clickHandler}
+      onBlur={clickHandler}
+      className={container}
+      onChange={searchHandler}
+    >
       <div className={icon}>
         <img src="icons/search.svg" style={{ height: '16px' }} />
       </div>
