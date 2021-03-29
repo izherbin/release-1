@@ -24,12 +24,12 @@ export const usePagination = (num) => {
     return setPages([...twoBefore, current, ...twoAfter]);
   }, [curPage]);
 
-  const pagesHandler = (n = false) => (e) => {
+  const paginationHandler = (n = false) => (e) => {
     const currentId = Number(e.target.id);
     if (!n) return setCurPage(currentId);
 
     return setCurPage(curPage + n);
   };
 
-  return { isPages, curPage, pagesHandler, checkIfexist };
+  return { isPages, curPage, paginationHandler, checkIfexist };
 };

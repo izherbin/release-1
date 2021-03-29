@@ -21,7 +21,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-export const TableGrowth = ({ data: { growth } }) => {
+export const TableGrowth = ({ data: { growth = '15%' } }) => {
   const { container, image } = useStyles();
 
   return (

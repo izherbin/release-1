@@ -4,32 +4,44 @@ import { db } from './db.js';
 const MONTHS_IN_YEAR = 12;
 const COEFF_TREND_SURPLUS = 1.0;
 
-export const getTableRows = async function getTableRows(
-  expr,
-  region,
-  begin,
-  end,
-  sortkey,
-  sortorder,
-) {
+export const getTableRows = async function (expr, region, begin, end, sortkey, sortorder) {
   const searchniche = expr ? `^${expr}` : '.*';
   const searchreg = region || '.*';
 
-  const filter = { nameniche: { $regex: searchniche }, namereg: { $regex: searchreg } };
+  const filter = {
+    nameniche: { $regex: searchniche },
+    namereg: { $regex: searchreg },
+  };
   const arr = await requests
     .find(filter)
     .skip(begin)
     .limit(end - begin);
+
+  // const testArray = await arr.slice(0, 1).map((el) => {
+  //   console.log('object ->', el);
+  //   console.log('stringify ->', JSON.parse(JSON.stringify(el)));
+  //   console.log('niche ->', el.niche);
+  //   console.log('nameniche ->', el.nameniche);
+  //   console.log('region ->', el.region);
+  //   console.log('namereg ->', el.namereg);
+  // });
+
   const res = [];
-  for (let i = 0; i < arr.length; i++) {
+
+  arr.map((_, i) => {
+    console.log(Object.values(arr[i]));
+
+    const { nameniche } = arr[i].toObject();
+
     res.push({
       number: i + 1,
-      niche: arr[i].nameniche,
-      // volume: sumLastYear(arr[i].volumes),
-      // growth: growthLastYear(arr[i].volumes),
-      // trend: trendSeason(arr[i].volumes, 2),
+      niche: nameniche,
+      volume: sumLastYear(arr[i].volumes),
+      growth: growthLastYear(arr[i].volumes),
+      trend: trendSeason(arr[i].volumes, 2),
     });
-  }
+  });
+
   return res;
 };
 
@@ -54,16 +66,19 @@ function growthLastYear(array) {
 }
 
 function trendSeason(array, lastperiod) {
+  const months = [...new Array(MONTHS_IN_YEAR)];
+
   if (array.length < MONTHS_IN_YEAR) return '';
+
   const averageLastYear = sumLastYear(array) / MONTHS_IN_YEAR;
   const arrLastYear = array.slice(-MONTHS_IN_YEAR);
   const arrTrend = [];
 
-  for (i = 0; i < MONTHS_IN_YEAR; i++) {
+  months.map((_, i) => {
     if (arrLastYear[i] > averageLastYear * COEFF_TREND_SURPLUS) {
       const seasonpeek = lastperiod - i > 0 ? lastperiod - i : lastperiod - i + MONTHS_IN_YEAR;
       arrTrend.push(String(seasonpeek));
     }
-  }
+  });
   return arrTrend.join(', ');
 }

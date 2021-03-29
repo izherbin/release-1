@@ -34,9 +34,9 @@ const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
   },
 }));
 
-export const Pagination = ({}) => {
+export const Pagination = ({ pageHandler }) => {
   const { container, page, selected } = useStyles();
-  const { isPages, curPage, pagesHandler, checkIfexist } = usePagination(20);
+  const { isPages, curPage, paginationHandler, checkIfexist } = usePagination(20);
   const checkIfSelected = (el) => (curPage === el ? selected : '');
   const { matchesMobile } = useMedia();
 
@@ -45,15 +45,15 @@ export const Pagination = ({}) => {
       {isPages.map((el, i) => (
         <div
           className={`${page} ${checkIfSelected(el)}`}
-          id={el}
-          onClick={pagesHandler()}
+          id={i}
+          onClick={[paginationHandler(), pageHandler]}
           key={`${i}pagination`}
         >
           {el}
         </div>
       ))}
       {!matchesMobile && checkIfexist(+1) && (
-        <span onClick={pagesHandler(1)} style={{ cursor: 'pointer', marginLeft: '12px' }}>
+        <span onClick={paginationHandler(1)} style={{ cursor: 'pointer', marginLeft: '12px' }}>
           Далее
         </span>
       )}

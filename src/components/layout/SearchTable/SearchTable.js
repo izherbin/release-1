@@ -25,8 +25,8 @@ export const SearchTable = ({ isData }) => {
 
   return (
     <div className={container}>
-      <TableHeader sizes={allSizesHeader} isData={isData} />
-      <TableEls sizes={allSizesTable} />
+      <TableHeader sizes={allSizesHeader} />
+      <TableEls sizes={allSizesTable} isData={isData} />
     </div>
   );
 };
