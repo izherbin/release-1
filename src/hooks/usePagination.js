@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const usePagination = (num = 20, pages, isRegion, isSearch) => {
+export const usePagination = (num, pages, isRegion, isSearch) => {
   const [curPage, setCurPage] = useState(1);
   const pagesArray = [...new Array(pages)].filter((_, i) => i % num === 0);
   const startPages = pagesArray.map((_, i) => i + 1).slice(0, 5);
@@ -41,6 +41,3 @@ export const usePagination = (num = 20, pages, isRegion, isSearch) => {
 
   return { isPages, curPage, paginationHandler, checkIfexist };
 };
-
-// при смене страны или поиске пересчитываем кол-во страниц
-// если кол-во страниц меняется, перерисовываем

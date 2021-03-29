@@ -6,13 +6,13 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {},
 }));
 
-export const TableEls = ({ sizes, isData, isPage }) => {
+export const TableEls = ({ sizes, data, isPage }) => {
   const { container } = useStyles();
-  const arrLength = isData.length;
+  const arrLength = data.length;
 
   return (
     <div className={container}>
-      {isData.map((el, i) => (
+      {data.map((el, i) => (
         <TableEl
           data={el}
           index={i}

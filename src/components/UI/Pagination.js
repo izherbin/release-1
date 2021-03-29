@@ -7,6 +7,7 @@ const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
+    paddingBottom: '40px',
     fontSize: '2rem',
     userSelect: 'none',
     [breakpoints.down('sm')]: {
@@ -36,14 +37,14 @@ const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
 
 export const Pagination = ({ pageHandler, pages, isSearch, isRegion }) => {
   const { container, page, selected } = useStyles();
+  const { matchesMobile } = useMedia();
   const { isPages, curPage, paginationHandler, checkIfexist } = usePagination(
-    20,
+    matchesMobile ? 1 : 20,
     pages,
     isRegion,
     isSearch,
   );
   const checkIfSelected = (el) => (curPage === el ? selected : '');
-  const { matchesMobile } = useMedia();
   const multipleOnclicks = (e) => {
     paginationHandler()(e);
     pageHandler(e);

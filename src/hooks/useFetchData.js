@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useMedia } from 'hooks/useMedia';
 import { URL } from '../backend/config';
 
 export const useFetchData = () => {
@@ -8,7 +9,7 @@ export const useFetchData = () => {
   const regionUrl = `${URL}/regions`;
   const defaultUrl = `${URL}/data?page=${isPage}&perPage=20`;
   const [isUrl, setUrl] = useState(defaultUrl);
-
+  const { matchesMobile } = useMedia();
   const [isLoading, setLoading] = useState(false);
 
   const [isData, setData] = useState([]);
@@ -31,7 +32,8 @@ export const useFetchData = () => {
   }, [isRegion, isSearch]);
 
   useEffect(() => {
-    const url = `${URL}/data?page=${isPage}&perPage=20`;
+    const perPage = matchesMobile ? '1' : '20';
+    const url = `${URL}/data?page=${isPage}&perPage=${perPage}`;
     const withRegion = `&region=${isRegion}`;
     const withSearch = `&search=${isSearch}`;
     const generateUrl = url + (isRegion ? withRegion : '') + (isSearch ? withSearch : '');

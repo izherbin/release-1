@@ -23,15 +23,23 @@ const Index = () => {
 
   const search = (props) =>
     matchesMobile
-      ? [<SearchTableMobile {...props} />, <Pagination />]
-      : [
-          <SearchTable {...props} isPage={isPage} isData={allData} />,
+      ? [
+          <SearchTableMobile {...props} isPage={isPage} data={allData} />,
           <Pagination
           pageHandler={pageHandler}
           pages={pages}
           isRegion={isRegion}
           isSearch={isSearch}
         />,
+        ]
+      : [
+        <SearchTable {...props} isPage={isPage} data={allData} />,
+        <Pagination
+            pageHandler={pageHandler}
+            pages={pages}
+            isRegion={isRegion}
+            isSearch={isSearch}
+          />,
         ];
 
   return (

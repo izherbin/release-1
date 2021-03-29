@@ -12,7 +12,7 @@ export const SearchInputs = ({ regions, regionHandler, searchHandler }) => {
       <Typography variant="h2" component="h2" style={{ marginBottom: '16px' }}>
         База ниш
       </Typography>
-      {matchesMobile && <SearchMobile />}
+      {matchesMobile && <SearchMobile searchHandler={searchHandler} />}
       {!matchesMobile && (
         <SearchDesktop
           regions={regions}

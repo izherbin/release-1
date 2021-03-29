@@ -5,28 +5,31 @@ import { SearchInputs } from 'components/layout/SearchInputs/SearchInputs';
 import { ToggleContext } from 'components/state/context/toggle-context';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
-  wholeCongtainer: {
+  wholeContainer: {
     position: 'relative',
-  },
-  container: {
-    width: '949px',
-    margin: '0 auto',
-    padding: '0 0 40px 0',
+    overflow: ({ toggled }) => (toggled ? 'hidden' : 'visible'),
+    height: '100%',
     '&:after': {
       content: '""',
       position: 'absolute',
       margin: '0 auto',
       width: ({ toggled }) => (toggled ? '100vw' : '0%'),
-      height: ({ toggled }) => (toggled ? '140vh' : '0%'),
+      height: '100vh',
       left: '0',
       top: '0',
       opacity: '0.6',
       backgroundColor: '#000',
     },
+  },
+  container: {
+    width: '949px',
+    height: '100%',
+    margin: '0 auto',
     [breakpoints.down('md')]: {
       maxWidth: '704px',
     },
     [breakpoints.down('sm')]: {
+      width: 'auto',
       padding: '0 29px',
       // maxWidth: '262px',
     },
