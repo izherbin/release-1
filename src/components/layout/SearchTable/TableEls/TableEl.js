@@ -40,11 +40,10 @@ export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
   const countLast = arrLength === index + 1;
   const { container, element, opacity60, opacity20, seasonStyle } = useStyles({ sizes, countLast });
   const { niche, volume, trend } = data;
-  const countNumber = isPage === 1 ? Number(isPage) + index : Number(isPage) * 10 + index + 1;
   const season = <div className={seasonStyle}>{trend}</div>;
 
   const content = [
-    <TableIndex number={countNumber} />,
+    <TableIndex isPage={isPage} index={index} />,
     niche,
     modPrice(volume),
     <TableGrowth data={data} />,

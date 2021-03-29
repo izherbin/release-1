@@ -28,7 +28,7 @@ const useStyles = makeStyles(({ palette: { primary, blueLight, blue }, shadows }
     alignItems: 'center',
     position: 'relative',
     height: '40px',
-    width: '102px',
+    width: '130px',
     padding: '0 0 0 16px',
     fontSize: '0.8rem',
     lineHeight: '1',
@@ -52,13 +52,17 @@ const useStyles = makeStyles(({ palette: { primary, blueLight, blue }, shadows }
   },
 }));
 
-export const SearchTableMobile = ({}) => {
+export const SearchTableMobile = ({ data = [] }) => {
+  const [oneItem = {}] = data;
   const { container, header, inner, textBlock, text, icon, content } = useStyles();
+
+  const { niche, volume, trend } = oneItem;
+
   const contentObj = [
-    'Бизнес аналитика',
-    modPrice(1000000),
+    niche,
+    modPrice(volume),
     <TableGrowth data={{ growth: '+15%' }} />,
-    '08/2020 - 02/2021',
+    trend,
     <TableAnomaly data={{ anomaly: [10, 10] }} />,
     <TableDifficulty data={{ difficulty: 4.5 }} />,
     <TableSave />,
