@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export const usePagination = (num) => {
-  const [isNumber, setNumber] = useState(234);
+export const usePagination = (num = 20, pages, isRegion, isSearch) => {
   const [curPage, setCurPage] = useState(1);
-  const startPages = [1, 2, 3, 4, 5];
-  const [isPages, setPages] = useState(startPages);
+  const pagesArray = [...new Array(pages)].filter((_, i) => i % num === 0);
+  const startPages = pagesArray.map((_, i) => i + 1).slice(0, 5);
 
-  const numberOfPages = [...new Array(isNumber)].filter((_, i) => i % num === 0).length;
+  const [isPages, setPages] = useState(startPages);
+  const numberOfPages = pagesArray.length;
 
   const checkIfexist = (n) => curPage + n <= numberOfPages;
 
@@ -17,6 +17,14 @@ export const usePagination = (num) => {
     (el) => el,
   );
   const current = checkIfexist(0) && curPage;
+
+  useEffect(() => {
+    setCurPage(1);
+  }, [isRegion, isSearch]);
+
+  useEffect(() => {
+    setPages(startPages);
+  }, [pages]);
 
   useEffect(() => {
     if (curPage < 5) return setPages(startPages);
@@ -33,3 +41,6 @@ export const usePagination = (num) => {
 
   return { isPages, curPage, paginationHandler, checkIfexist };
 };
+
+// при смене страны или поиске пересчитываем кол-во страниц
+// если кол-во страниц меняется, перерисовываем

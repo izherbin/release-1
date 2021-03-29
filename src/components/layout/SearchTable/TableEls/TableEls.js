@@ -6,24 +6,21 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {},
 }));
 
-export const TableEls = ({ sizes, isData }) => {
+export const TableEls = ({ sizes, isData, isPage }) => {
   const { container } = useStyles();
-
-  // const content = [...new Array(20)].map(() => {
-  //   return {
-  //     name: 'Бизнес аналитика',
-  //     volume: 1000000,
-  //     growth: '+15.0%',
-  //     season: '08/2020 - 02/2021',
-  //     anomaly: [10, 10],
-  //     difficulty: 4.5,
-  //   };
-  // });
+  const arrLength = isData.length;
 
   return (
     <div className={container}>
       {isData.map((el, i) => (
-        <TableEl data={el} index={i} sizes={sizes} key={`${i}table`} />
+        <TableEl
+          data={el}
+          index={i}
+          sizes={sizes}
+          key={`${i}table`}
+          isPage={isPage}
+          arrLength={arrLength}
+        />
       ))}
     </div>
   );

@@ -32,14 +32,14 @@ const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
   },
 }));
 
-export const SelectRegion = ({ isData }) => {
+export const SelectRegion = ({ regionHandler, regions }) => {
   const {
     toggleState: { toggled },
     dispatch,
   } = useContext(ToggleContext);
   const { container, icon, dropDown } = useStyles(toggled);
   const toggleHandler = () => dispatch({});
-  const { isSelected, selectHandler } = useRegionSelect();
+  const { isSelected, selectHandler } = useRegionSelect(regions, regionHandler);
 
   return (
     <div className={container} onClick={toggleHandler}>
@@ -49,7 +49,7 @@ export const SelectRegion = ({ isData }) => {
       </div>
       <Fade in={toggled}>
         <div className={dropDown}>
-          {toggled && <DropDown isData={isData} selectHandler={selectHandler} />}
+          {toggled && <DropDown regions={regions} selectHandler={selectHandler} />}
         </div>
       </Fade>
     </div>

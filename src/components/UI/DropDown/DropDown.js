@@ -32,11 +32,11 @@ const useStyles = makeStyles(({ palette: { primary, blueLight }, shadow }) => ({
   },
 }));
 
-export const DropDown = ({ isData = [], selectHandler }) => {
+export const DropDown = ({ regions = [], selectHandler }) => {
   const { container, title, content } = useStyles();
   const russia = { country: 'Россия' };
-  const { isToggle, toggleHandler } = useToggle();
-  const { filteredRussia, filteredCountries } = useRegionSelect(isData);
+  const { isToggle, toggleHandler } = useToggle(true);
+  const { filteredRussia } = useRegionSelect(regions, selectHandler);
 
   const data = filteredRussia.map((el, i) => (
     <DropElement
@@ -60,9 +60,9 @@ export const DropDown = ({ isData = [], selectHandler }) => {
           selectHandler={selectHandler}
         />
         {isToggle && data}
-        {filteredCountries.map((el) => (
+        {/* {filteredCountries.map((el) => (
           <DropElement handler={toggleHandler} object={el} selectHandler={selectHandler} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

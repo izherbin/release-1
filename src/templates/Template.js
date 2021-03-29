@@ -27,12 +27,13 @@ const useStyles = makeStyles(({ breakpoints }) => ({
       maxWidth: '704px',
     },
     [breakpoints.down('sm')]: {
-      maxWidth: '262px',
+      padding: '0 29px',
+      // maxWidth: '262px',
     },
   },
 }));
 
-export const Template = ({ children, isData }) => {
+export const Template = ({ children, isData, regionHandler, regions, searchHandler }) => {
   const {
     toggleState: { toggled },
     resetToggle,
@@ -46,7 +47,12 @@ export const Template = ({ children, isData }) => {
           <Header />
         </div>
         <div style={{ marginBottom: '40px' }}>
-          <SearchInputs isData={isData} />
+          <SearchInputs
+            isData={isData}
+            regionHandler={regionHandler}
+            regions={regions}
+            searchHandler={searchHandler}
+          />
         </div>
         {children()}
       </div>

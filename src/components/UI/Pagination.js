@@ -34,25 +34,34 @@ const useStyles = makeStyles(({ palette: { blue }, breakpoints }) => ({
   },
 }));
 
-export const Pagination = ({ pageHandler }) => {
+export const Pagination = ({ pageHandler, pages, isSearch, isRegion }) => {
   const { container, page, selected } = useStyles();
-  const { isPages, curPage, paginationHandler, checkIfexist } = usePagination(20);
+  const { isPages, curPage, paginationHandler, checkIfexist } = usePagination(
+    20,
+    pages,
+    isRegion,
+    isSearch,
+  );
   const checkIfSelected = (el) => (curPage === el ? selected : '');
   const { matchesMobile } = useMedia();
+  const multipleOnclicks = (e) => {
+    paginationHandler()(e);
+    pageHandler(e);
+  };
 
   return (
     <div className={container}>
       {isPages.map((el, i) => (
         <div
           className={`${page} ${checkIfSelected(el)}`}
-          id={i}
-          onClick={[paginationHandler(), pageHandler]}
+          id={el}
+          onClick={multipleOnclicks}
           key={`${i}pagination`}
         >
           {el}
         </div>
       ))}
-      {!matchesMobile && checkIfexist(+1) && (
+      {!matchesMobile && checkIfexist(1) && (
         <span onClick={paginationHandler(1)} style={{ cursor: 'pointer', marginLeft: '12px' }}>
           Далее
         </span>

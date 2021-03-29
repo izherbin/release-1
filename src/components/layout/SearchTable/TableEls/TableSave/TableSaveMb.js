@@ -4,12 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(({ palette: { blue } }) => ({
   container: {
     display: 'flex',
+    height: '22px',
+    maxWidth: '127px',
     transform: 'translate(1px, -6px)',
     fontSize: '1rem',
-    borderRadius: '4px',
     cursor: 'pointer',
     boxSizing: 'border-box',
-    height: '22px',
+    borderRadius: '4px',
     border: `1px solid ${blue}`,
   },
   button: {

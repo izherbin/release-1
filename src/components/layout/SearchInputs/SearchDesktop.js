@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-export const SearchDesktop = ({ isData }) => {
+export const SearchDesktop = ({ regions, regionHandler, searchHandler }) => {
   const { container, search } = useStyles();
   const { matchesTablet } = useMedia();
 
@@ -28,10 +28,10 @@ export const SearchDesktop = ({ isData }) => {
     <Fragment>
       <div className={container}>
         <div className={search}>
-          <Search />
+          <Search searchHandler={searchHandler} />
         </div>
         <div style={{ marginRight: '30px' }}>
-          {!matchesTablet && <SelectRegion isData={isData} />}
+          {!matchesTablet && <SelectRegion regions={regions} regionHandler={regionHandler} />}
         </div>
         <div style={{ marginRight: '38px' }}>
           <Filter />

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 /* eslint-disable */
-export const useRegionSelect = (isData) => {
+export const useRegionSelect = (regions, regionHandler) => {
 	const [isSelected, setSelected] = useState('Регион запуска бизнеса');
 
   const filteredRussia =
-    isData &&
-    isData
+    regions &&
+    regions
       .filter((el) => el.country === 'Россия')
       .map((el) => {
         if (el.name === "" && el.country === 'Россия') {
@@ -19,12 +19,13 @@ export const useRegionSelect = (isData) => {
         return el;
       });
 
-	const filteredCountries = isData && isData.filter((el) => el.country !== 'Россия');
+	// const filteredCountries = regions && regions.filter((el) => el.country !== 'Россия');
 	
   const selectHandler = (e) => {
     const name = e.target.id;
-    if (name !== 'Россия') return setSelected(name);
+    if (name === 'Вся Россия') return [setSelected(name), regionHandler(null)];
+    if (name !== 'Россия') return [setSelected(name), regionHandler(name)];
   };
 
-  return { filteredRussia, filteredCountries, selectHandler, isSelected };
+  return { filteredRussia, selectHandler, isSelected };
 };
