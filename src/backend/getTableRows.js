@@ -17,20 +17,11 @@ export const getTableRows = async function (expr, region, begin, end, sortkey, s
     .skip(begin)
     .limit(end - begin);
 
-  // const testArray = await arr.slice(0, 1).map((el) => {
-  //   console.log('object ->', el);
-  //   console.log('stringify ->', JSON.parse(JSON.stringify(el)));
-  //   console.log('niche ->', el.niche);
-  //   console.log('nameniche ->', el.nameniche);
-  //   console.log('region ->', el.region);
-  //   console.log('namereg ->', el.namereg);
-  // });
+  const arrLength = await requests.find(filter).countDocuments();
 
   const res = [];
 
   arr.map((_, i) => {
-    console.log(Object.values(arr[i]));
-
     const { nameniche } = arr[i].toObject();
 
     res.push({
@@ -42,7 +33,7 @@ export const getTableRows = async function (expr, region, begin, end, sortkey, s
     });
   });
 
-  return res;
+  return { res, arrLength };
 };
 
 function sumLastYear(array) {

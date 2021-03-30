@@ -5,15 +5,6 @@ import { getRegions } from './getRegions.js';
 import { getTableRows, getTableLength } from './getTableRows.js';
 import { corsOptions } from './config.js';
 
-export const countArray = async () => {
-  const arr = await getTableRows();
-  return arr.length;
-};
-
-export const searchBase = (exp) => getTableRows(exp);
-export const regionSort = (region) => getTableRows(null, region);
-export const dataSlice = (begin, end) => getTableRows(null, null, begin, end);
-
 const app = express();
 app.use(cors());
 
@@ -21,34 +12,31 @@ const port = process.env.PORT || 8280;
 
 app.get('/regions', cors(corsOptions), async (req, res) => {
   const getData = await getRegions();
-  const response = res.status(200).send(getData);
 
-  return response;
+  res.status(200).send(getData);
 });
 
 app.get('/data', cors(corsOptions), async (req, res) => {
   const {
     query: { region, page, perPage, search },
   } = req;
-  console.log('req', req.url);
 
-  const pagesNumber = countArray();
   const pagesToSlice = (pageNum = page, perPageNum = perPage) => {
-    const start = Number(pageNum * perPageNum);
+    const start = page === '1' ? 0 : Number(pageNum * Math.round(perPageNum / 2)) + 1;
     const end = start + Number(perPageNum);
 
     return [start, end];
   };
+
   const [start, end] = pagesToSlice();
-  const data = await getTableRows(search || null, region || null, start, end);
-  console.log('getTableRows.length', data.length);
-  const length = await getTableLength(search || null, region || null);
-  console.log('length', length);
+  const { res: data, arrLength: length } = await getTableRows(
+    search || null,
+    region || null,
+    start,
+    end,
+  );
 
-  // const getData = await getTableRows();
-  const response = res.status(200).send([data, length]);
-
-  return { response, length };
+  res.status(200).send([data, length]);
 });
 
 app.listen(port);

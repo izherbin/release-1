@@ -24,7 +24,9 @@ export const useFetchData = () => {
 
   const searchHandler = (e) => {
     const { value } = e.target;
-    setSearch(value);
+    const lowerCase = value.toLowerCase();
+
+    setSearch(lowerCase);
   };
 
   useEffect(() => {

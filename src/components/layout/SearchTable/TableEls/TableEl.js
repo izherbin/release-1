@@ -6,6 +6,7 @@ import { TableGrowth } from 'components/layout/SearchTable/TableEls/TableGrowth'
 import { TableAnomaly } from 'components/layout/SearchTable/TableEls/TableAnomaly';
 import { TableDifficulty } from 'components/layout/SearchTable/TableEls/TableDifficulity/TableDifficulty';
 import { TableSave } from 'components/layout/SearchTable/TableEls/TableSave/TableSave';
+import { TableSeason } from 'components/layout/SearchTable/TableEls/TableSeason';
 
 const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
   container: {
@@ -28,26 +29,27 @@ const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
     opacity: '0.2',
     borderRadius: (countLast) => (countLast ? '0 0 4px 4px' : '0'),
   },
-  seasonStyle: {
-    [breakpoints.down('md')]: {
-      fontSize: '0.8rem',
-    },
+  left: {
+    justifyContent: 'left',
+    paddingLeft: '16px',
   },
 }));
 
 export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
   const countBeforeLast = arrLength === index + 2;
   const countLast = arrLength === index + 1;
-  const { container, element, opacity60, opacity20, seasonStyle } = useStyles({ sizes, countLast });
+  const { container, element, opacity60, opacity20, left } = useStyles({
+    sizes,
+    countLast,
+  });
   const { niche, volume, trend } = data;
-  const season = <div className={seasonStyle}>{trend}</div>;
 
   const content = [
     <TableIndex isPage={isPage} index={index} />,
     niche,
     modPrice(volume),
     <TableGrowth data={data} />,
-    season,
+    <TableSeason data={data} />,
     <TableAnomaly data={data} />,
     <TableDifficulty data={data} />,
     <TableSave />,
@@ -61,7 +63,11 @@ export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
   return (
     <div className={`${container} ${checkIndex()}`}>
       {content.map((el, i) => (
-        <div style={{ width: sizes[i] }} className={`${element}`} key={`${i}table`}>
+        <div
+          style={{ width: sizes[i] }}
+          className={`${element} ${i === 1 ? left : ''}`}
+          key={`${i}table`}
+        >
           {el}
         </div>
       ))}
