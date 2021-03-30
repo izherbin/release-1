@@ -21,13 +21,14 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-export const TableGrowth = ({ data: { growth = '15%' } }) => {
+export const TableGrowth = ({ data: { growth } }) => {
   const { container, image } = useStyles();
+  const checkGrowth = growth || '-';
 
   return (
     <div className={container}>
       <img src="icons/uptrend.svg" className={image} />
-      {growth}
+      {checkGrowth}
     </div>
   );
 };

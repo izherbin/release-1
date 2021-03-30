@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { UpDown } from 'components/UI/UpDown';
+import { CustomTooltip } from 'components/UI/CustomTooltip';
 
 const useStyles = makeStyles(({ palette: { primary, blueLight }, breakpoints }) => ({
   container: {
@@ -39,7 +40,11 @@ export const TableHeaderEl = ({ name, sizes = [], index, isOrdered, orderHandler
       <span className={text}>{name}</span>
       {index !== 0 && (
         <div className={right}>
-          {index !== 0 && <img src="icons/info.svg" alt="" className={info} />}
+          {index !== 0 && (
+            <CustomTooltip title="Я твой тултип">
+              <img src="icons/info.svg" alt="" className={info} />
+            </CustomTooltip>
+          )}
           <UpDown index={index} isOrdered={isOrdered} orderHandler={orderHandler} isUp={isUp} />
         </div>
       )}
