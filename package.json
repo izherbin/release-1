@@ -2,7 +2,7 @@
   "name": "business",
   "version": "0.0.1",
   "scripts": {
-    "dev": "next -p 8965",
+    "dev": "next -p 8967",
     "build": "next build",
     "start": "next start -p 8967",
     "lint": "eslint components pages lib"
