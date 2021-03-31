@@ -5,6 +5,7 @@ import { DropDown } from 'components/UI/DropDown/DropDown';
 import { Fade } from 'utils/transitions';
 import { useRegionSelect } from 'hooks/useRegionSelect';
 import { useMedia } from 'hooks/useMedia';
+import { useFetchData } from 'hooks/useFetchData';
 
 const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpoints }) => ({
   container: {
@@ -38,7 +39,14 @@ const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpo
     left: '-1px',
     top: '53px',
     [breakpoints.down('md')]: {
-      left: '-160px',
+      left: '-260px',
+      zIndex: '10',
+    },
+    [breakpoints.down('sm')]: {
+      top: '44px',
+      // left: '50%',
+
+      transform: 'translate(-55%, 0)',
       zIndex: '10',
     },
   },
@@ -51,11 +59,15 @@ export const Filter = ({ regionHandler, regions }) => {
     dispatch,
   } = useContext(ToggleContext);
   const { isSelected, selectHandler } = useRegionSelect(regions, regionHandler);
-  const { matchesMobile } = useMedia();
+  const { matchesMobile, matchesTablet } = useMedia();
   const toggleHandler = () => dispatch({});
+  const customFunc = (e) => {
+    if (matchesMobile || matchesTablet) return [toggleHandler(), regionHandler(e)];
+  };
 
   return (
-    <div className={container} onClick={toggleHandler}>
+    // <div className={container}>
+    <div className={container} onClick={customFunc}>
       <svg height="15" viewBox="0 0 16 15" width="16" className={svg}>
         <g fillRule="evenodd">
           <path d="m.82604651 2.75348837h1.00837209c.24776427.88104501 1.05129174 1.48977546 1.96651163 1.48977546s1.71874736-.60873045 1.96651163-1.48977546h9.57023254c.308252 0 .5581396-.24988758.5581396-.55813953 0-.30825196-.2498876-.55813954-.5581396-.55813954h-9.56651161c-.24776427-.88104501-1.05129174-1.48977546-1.96651163-1.48977546s-1.71874736.60873045-1.96651163 1.48977546h-1.01209302c-.30825195 0-.55813953.24988758-.55813953.55813954 0 .30825195.24988758.55813953.55813953.55813953zm2.97674419-1.48837209c.51375325 0 .93023256.4164793.93023256.93023256 0 .51375325-.41647931.93023256-.93023256.93023256-.51375326 0-.93023256-.41647931-.93023256-.93023256 0-.51375326.4164793-.93023256.93023256-.93023256z" />

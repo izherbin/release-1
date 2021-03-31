@@ -34,7 +34,7 @@ export const SearchDesktop = ({ regions, regionHandler, searchHandler }) => {
           {!matchesTablet && <SelectRegion regions={regions} regionHandler={regionHandler} />}
         </div>
         <div style={{ marginRight: '38px' }}>
-          <Filter />
+          <Filter regionHandler={regionHandler} regions={regions} />
         </div>
         <Button disableRipple>Найти</Button>
       </div>
