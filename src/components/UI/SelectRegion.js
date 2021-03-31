@@ -5,7 +5,7 @@ import { Fade } from 'utils/transitions';
 import { ToggleContext } from 'components/state/context/toggle-context';
 import { useRegionSelect } from 'hooks/useRegionSelect';
 
-const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
+const useStyles = makeStyles(({ palette: { secondary, blueLight }, breakpoints }) => ({
   container: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -29,6 +29,14 @@ const useStyles = makeStyles(({ palette: { secondary, blueLight } }) => ({
     position: 'absolute',
     left: '-1px',
     top: '53px',
+    // [breakpoints.down('md')]: {
+    //   left: '260px',
+    //   zIndex: '10',
+    // },
+    // [breakpoints.down('sm')]: {
+    //   left: '-160px',
+    //   zIndex: '10',
+    // },
   },
 }));
 

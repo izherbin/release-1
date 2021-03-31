@@ -23,6 +23,7 @@ export const useFetchData = () => {
   };
 
   const regionHandler = (e) => {
+    console.log('regionHandler -> e', e);
     setRegion(e);
   };
 
