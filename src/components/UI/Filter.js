@@ -36,6 +36,7 @@ const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpo
     position: 'absolute',
     left: '-160px',
     top: '53px',
+    zIndex: '10',
   },
 }));
 
