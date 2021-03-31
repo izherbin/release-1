@@ -4,6 +4,7 @@ import { ToggleContext } from 'components/state/context/toggle-context';
 import { DropDown } from 'components/UI/DropDown/DropDown';
 import { Fade } from 'utils/transitions';
 import { useRegionSelect } from 'hooks/useRegionSelect';
+import { useMedia } from 'hooks/useMedia';
 
 const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpoints }) => ({
   container: {
@@ -34,9 +35,12 @@ const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpo
   },
   dropDown: {
     position: 'absolute',
-    left: '-160px',
+    left: '-1px',
     top: '53px',
-    zIndex: '10',
+    [breakpoints.down('md')]: {
+      left: '-160px',
+      zIndex: '10',
+    },
   },
 }));
 
@@ -47,6 +51,7 @@ export const Filter = ({ regionHandler, regions }) => {
     dispatch,
   } = useContext(ToggleContext);
   const { isSelected, selectHandler } = useRegionSelect(regions, regionHandler);
+  const { matchesMobile } = useMedia();
   const toggleHandler = () => dispatch({});
 
   return (
@@ -58,11 +63,13 @@ export const Filter = ({ regionHandler, regions }) => {
           <path d="m15.3376744 12.055814h-1.0083721c-.2477642-.8810451-1.0512917-1.4897755-1.9665116-1.4897755s-1.7187474.6087304-1.9665116 1.4897755h-9.57023259c-.30825195 0-.55813953.2498875-.55813953.5581395 0 .3082519.24988758.5581395.55813953.5581395h9.56651159c.2477643.881045 1.0512918 1.4897755 1.9665117 1.4897755s1.7187473-.6087305 1.9665116-1.4897755h1.012093c.308252 0 .5581396-.2498876.5581396-.5581395 0-.308252-.2498876-.5581395-.5581396-.5581395zm-2.9767442 1.488372c-.5137532 0-.9302325-.4164793-.9302325-.9302325 0-.5137533.4164793-.9302326.9302325-.9302326.5137533 0 .9302326.4164793.9302326.9302326 0 .5137532-.4164793.9302325-.9302326.9302325z" />
         </g>
       </svg>
-      <Fade in={toggled}>
-        <div className={dropDown}>
-          {toggled && <DropDown regions={regions} selectHandler={selectHandler} />}
-        </div>
-      </Fade>
+      {matchesMobile && (
+        <Fade in={toggled}>
+          <div className={dropDown}>
+            {toggled && <DropDown regions={regions} selectHandler={selectHandler} />}
+          </div>
+        </Fade>
+      )}
     </div>
   );
 };
