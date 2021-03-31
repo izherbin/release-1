@@ -54,7 +54,6 @@ export const useFetchData = () => {
       (isRegion ? withRegion : '') +
       (isSearch ? withSearch : '') +
       (isOrder ? withOrder : '');
-    console.log('useFetchData -> generateUrl', generateUrl);
 
     setUrl(generateUrl);
   }, [isRegion, isSearch, isPage, isOrder]);
