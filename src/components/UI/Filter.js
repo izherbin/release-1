@@ -44,9 +44,9 @@ const useStyles = makeStyles(({ palette: { blue, blueLight, secondary }, breakpo
     },
     [breakpoints.down('sm')]: {
       top: '44px',
-      // left: '50%',
+      left: '50%',
 
-      transform: 'translate(-55%, 0)',
+      transform: 'translate(-140%, 0)',
       zIndex: '10',
     },
   },
