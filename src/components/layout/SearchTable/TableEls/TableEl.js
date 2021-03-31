@@ -49,7 +49,7 @@ export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
     niche,
     modPrice(volume),
     <TableGrowth data={data} />,
-    <TableSeason data={data} />,
+    <TableSeason trend={trend} />,
     <TableAnomaly data={data} />,
     <TableDifficulty data={data} />,
     <TableSave />,
@@ -58,6 +58,8 @@ export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
   const checkIndex = () => {
     if (countBeforeLast) return opacity60;
     if (countLast) return opacity20;
+
+    return '';
   };
 
   return (

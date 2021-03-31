@@ -5,14 +5,18 @@ import { URL } from '../backend/config';
 export const useFetchData = () => {
   const [isRegion, setRegion] = useState(false);
   const [isSearch, setSearch] = useState(false);
+  const [isOrder, setOrder] = useState(false);
   const [isPage, setPage] = useState(1);
+
   const regionUrl = `${URL}/regions`;
   const defaultUrl = `${URL}/data?page=${isPage}&perPage=20`;
+
   const [isUrl, setUrl] = useState(defaultUrl);
   const { matchesMobile } = useMedia();
   const [isLoading, setLoading] = useState(false);
 
   const [isData, setData] = useState([]);
+
   const pageHandler = (e) => {
     const { id } = e.target;
     setPage(id);
@@ -20,6 +24,12 @@ export const useFetchData = () => {
 
   const regionHandler = (e) => {
     setRegion(e);
+  };
+
+  const orderHandler = (e) => {
+    const { value } = e.target;
+
+    setOrder(value);
   };
 
   const searchHandler = (e) => {
@@ -38,19 +48,23 @@ export const useFetchData = () => {
     const url = `${URL}/data?page=${isPage}&perPage=${perPage}`;
     const withRegion = `&region=${isRegion}`;
     const withSearch = `&search=${isSearch}`;
-    const generateUrl = url + (isRegion ? withRegion : '') + (isSearch ? withSearch : '');
+    const withOrder = `&sortkey=${isOrder}`;
+    const generateUrl =
+      url +
+      (isRegion ? withRegion : '') +
+      (isSearch ? withSearch : '') +
+      (isOrder ? withOrder : '');
+    console.log('useFetchData -> generateUrl', generateUrl);
 
     setUrl(generateUrl);
-  }, [isRegion, isSearch, isPage]);
+  }, [isRegion, isSearch, isPage, isOrder]);
 
   useEffect(async () => {
     setLoading(true);
 
     try {
       const req = await Promise.all([fetch(isUrl), fetch(regionUrl)]);
-
       const [data, regions] = await Promise.all(req.map((res) => res.json()));
-      // const [data, pages] = data;
 
       setData({ data, regions });
     } catch (error) {
@@ -69,5 +83,7 @@ export const useFetchData = () => {
     pageHandler,
     regionHandler,
     searchHandler,
+    orderHandler,
+    setOrder,
   };
 };
