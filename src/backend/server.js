@@ -2,7 +2,7 @@
 import cors from 'cors';
 import express from 'express';
 import { getRegions } from './getRegions.js';
-import { getTableRows, getTableLength } from './getTableRows.js';
+import { getTableRows } from './getTableRows.js';
 import { corsOptions } from './config.js';
 
 const app = express();

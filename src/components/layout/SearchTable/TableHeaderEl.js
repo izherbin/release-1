@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { UpDown } from 'components/UI/UpDown';
 import { CustomTooltip } from 'components/UI/CustomTooltip';
+import { ToggleContext } from 'components/state/context/toggle-context';
 
 const useStyles = makeStyles(({ palette: { primary, blueLight }, breakpoints }) => ({
   container: {
@@ -32,22 +33,25 @@ const useStyles = makeStyles(({ palette: { primary, blueLight }, breakpoints }) 
   },
 }));
 
-export const TableHeaderEl = ({ name, sizes = [], index, isOrdered, orderHandler, isUp }) => {
+export const TableHeaderEl = ({ name, sizes = [], index, isUp, orderHandler, isOrdered }) => {
   const { container, text, right, info } = useStyles({ sizes, index });
+  const cliclHan = () => console.log(2);
 
   return (
     <div className={container}>
       <span className={text}>{name}</span>
-      {index !== 0 && (
-        <div className={right}>
-          {index !== 0 && (
+      {/* {index !== 0 && ( */}
+      <div className={right}>
+        {index !== 0 && (
+          <div onMouseEnter={cliclHan}>
             <CustomTooltip title="Я твой тултип">
               <img src="icons/info.svg" alt="" className={info} />
             </CustomTooltip>
-          )}
-          <UpDown index={index} isOrdered={isOrdered} orderHandler={orderHandler} isUp={isUp} />
-        </div>
-      )}
+          </div>
+        )}
+        <UpDown index={index} isOrdered={isOrdered} orderHandler={orderHandler} isUp={isUp} />
+      </div>
+      {/* )} */}
     </div>
   );
 };
