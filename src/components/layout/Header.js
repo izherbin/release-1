@@ -27,9 +27,9 @@ export const Header = ({}) => {
       <div className={register} id={id} onClick={modalHandler}>
         Register
       </div>
-      <ModalContainer handleClose={handleClose} isOpened={isOpened} id={id}>
+      {/* <ModalContainer handleClose={handleClose} isOpened={isOpened} id={id}>
         111
-      </ModalContainer>
+      </ModalContainer> */}
     </div>
   );
 };
