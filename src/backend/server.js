@@ -21,11 +21,10 @@ app.get('/data', cors(corsOptions), async (req, res) => {
   const {
     query: { region, page, perPage, search, sortkey, sortorder },
   } = req;
-  const toNumbers = 
 
-  const pagesToSlice = (pageNum = page, perPageNum = perPage) => {
-    const start = pageNum === '1' ? 0 : Number(pageNum * Math.round(perPageNum / 2)) + 1;
-    const end = start + Number(perPageNum);
+  const pagesToSlice = (pageNum = Number(page), perPageNum = Number(perPage)) => {
+    const start = pageNum * Math.round(perPageNum) - Math.round(perPageNum);
+    const end = start + perPageNum;
 
     return [start, end];
   };
