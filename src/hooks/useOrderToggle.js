@@ -1,20 +1,18 @@
 import { useState } from 'react';
-import { useFetchData } from 'hooks/useFetchData';
 
-export const useOrderToggle = () => {
+export const useOrderToggle = ({ setSortHandler, setOrderHandler }) => {
   const [isOrdered, setOrdered] = useState(false);
   const [isUp, setUp] = useState(true);
-  const { setOrder } = useFetchData();
 
   const orderHandler = (e) => {
     const { id } = e.currentTarget;
 
-    setOrder(id);
+    setSortHandler(id);
     setOrdered(id);
 
-    if (!isUp) return setUp(true);
+    if (!isUp) return [setUp(true), setOrderHandler('-1')];
 
-    return setUp(false);
+    return [setUp(false), setOrderHandler('+1')];
   };
 
   return { isOrdered, orderHandler, isUp };

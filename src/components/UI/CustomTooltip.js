@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
-const useStyles = makeStyles(({ palette: { primary, secondary, blueLight }, shadow }) => ({
+const useStyles = makeStyles(({ palette: { primary, secondary }, shadow }) => ({
   arrow: {
     color: primary.dim,
   },

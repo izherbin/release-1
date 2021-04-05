@@ -3,21 +3,23 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Header } from 'components/layout/Header';
 import { SearchInputs } from 'components/layout/SearchInputs/SearchInputs';
 import { ToggleContext } from 'components/state/context/toggle-context';
+import { useFetchData } from 'hooks/useFetchData';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   wholeContainer: {
     position: 'relative',
-    overflow: ({ toggled }) => (toggled ? 'hidden' : 'visible'),
     height: '100%',
+    overflow: ({ dimmed }) => (dimmed ? 'hidden' : 'visible'),
     '&:after': {
+      zIndex: '0',
       content: '""',
       position: 'absolute',
       margin: '0 auto',
-      width: ({ toggled }) => (toggled ? '100vw' : '0%'),
+      opacity: ({ dimmed }) => (dimmed ? '0.6' : '1'),
+      width: ({ dimmed }) => (dimmed ? '100vw' : '0%'),
       height: '100vh',
       left: '0',
       top: '0',
-      opacity: '0.6',
       backgroundColor: '#000',
     },
   },
@@ -35,28 +37,28 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-export const Template = ({ children, isData, regionHandler, regions, searchHandler }) => {
+export const Template = ({ children }) => {
   const {
-    toggleState: { toggled },
-    resetToggle,
+    toggleState: { dimmed },
+    resetHandler,
   } = useContext(ToggleContext);
-  const { wholeContainer, container } = useStyles({ toggled });
+  const { wholeContainer, container } = useStyles({ dimmed });
+  const { isData, ...rest } = useFetchData();
+
+  const { data = [], regions } = isData;
+  const [, pages] = data;
+  const dataObject = { items: data, pages, ...rest };
 
   return (
-    <div className={wholeContainer} onClick={resetToggle}>
+    <div className={wholeContainer} onClick={resetHandler}>
       <div className={container}>
         <div style={{ marginBottom: '12px' }}>
           <Header />
         </div>
         <div style={{ marginBottom: '40px' }}>
-          <SearchInputs
-            isData={isData}
-            regionHandler={regionHandler}
-            regions={regions}
-            searchHandler={searchHandler}
-          />
+          <SearchInputs regions={regions} {...rest} />
         </div>
-        {children()}
+        {children(dataObject)}
       </div>
     </div>
   );

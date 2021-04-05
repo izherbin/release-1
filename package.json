@@ -13,14 +13,16 @@
     "@material-ui/icons": "4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@material-ui/styles": "4.11.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.2",
-    "cors": "^2.8.5",
     "next": "^10.0.2",
     "node-fetch": "^2.6.1",
     "react": "latest",
-    "react-dom": "latest"
+    "react-click-away-listener": "^2.0.2",
+    "react-dom": "latest",
+    "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
     "babel-eslint": "10.0.2",

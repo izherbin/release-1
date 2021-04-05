@@ -3,8 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { UpDown } from 'components/UI/UpDown';
 import { CustomTooltip } from 'components/UI/CustomTooltip';
 import { ToggleContext } from 'components/state/context/toggle-context';
+import { DIMMED_BG } from 'components/state/constants';
+import { useToggle } from 'hooks/useToggle';
+import ClickAwayListener from 'react-click-away-listener';
 
-const useStyles = makeStyles(({ palette: { primary, blueLight }, breakpoints }) => ({
+const useStyles = makeStyles(({ palette: { primary, blueLight } }) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -26,30 +29,38 @@ const useStyles = makeStyles(({ palette: { primary, blueLight }, breakpoints }) 
     display: 'flex',
     transform: 'translateX(8px)',
     cursor: 'pointer',
-    zIndex: '0',
+    position: 'relative',
+    zIndex: '1',
   },
   info: {
     transform: 'translateX(-8px)',
+    zIndex: '1',
+    cursor: 'pointer',
   },
 }));
 
-export const TableHeaderEl = ({ name, sizes = [], index, isUp, orderHandler, isOrdered }) => {
+export const TableHeaderEl = ({ name, sizes = [], index, ...rest }) => {
   const { container, text, right, info } = useStyles({ sizes, index });
-  const cliclHan = () => console.log(2);
+  const {
+    dispatch,
+    toggleState: { dimmed },
+  } = useContext(ToggleContext);
+  const { isToggle, toggleHandler, toggleOff } = useToggle();
+  const dispatchHandler = () => [toggleHandler(), dispatch({ type: DIMMED_BG })];
 
   return (
     <div className={container}>
       <span className={text}>{name}</span>
       {index !== 0 && (
         <div className={right}>
-          {index !== 0 && (
-            <div onMouseEnter={cliclHan}>
-              <CustomTooltip title="Я твой тултип">
-                <img src="icons/info.svg" alt="" className={info} />
+          <ClickAwayListener onClickAway={toggleOff}>
+            <div>
+              <CustomTooltip title="Я твой тултип" id="Инфо" open={isToggle}>
+                <img src="icons/info.svg" className={info} id="Инфо" onClick={dispatchHandler} />
               </CustomTooltip>
             </div>
-          )}
-          <UpDown index={index} isOrdered={isOrdered} orderHandler={orderHandler} isUp={isUp} />
+          </ClickAwayListener>
+          <UpDown index={index} dimmed={dimmed} {...rest} />
         </div>
       )}
     </div>

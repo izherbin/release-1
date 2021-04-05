@@ -4,7 +4,7 @@ import { SearchMobile } from 'components/layout/SearchInputs/SearchMobile';
 import { SearchDesktop } from 'components/layout/SearchInputs/SearchDesktop';
 import { useMedia } from 'hooks/useMedia';
 
-export const SearchInputs = ({ regions, regionHandler, searchHandler }) => {
+export const SearchInputs = ({ ...props }) => {
   const { matchesMobile } = useMedia();
 
   return (
@@ -12,20 +12,7 @@ export const SearchInputs = ({ regions, regionHandler, searchHandler }) => {
       <Typography variant="h2" component="h2" style={{ marginBottom: '16px' }}>
         База ниш
       </Typography>
-      {matchesMobile && (
-        <SearchMobile
-          searchHandler={searchHandler}
-          regionHandler={regionHandler}
-          regions={regions}
-        />
-      )}
-      {!matchesMobile && (
-        <SearchDesktop
-          regions={regions}
-          regionHandler={regionHandler}
-          searchHandler={searchHandler}
-        />
-      )}
+      {matchesMobile ? <SearchMobile {...props} /> : <SearchDesktop {...props} />}
     </Fragment>
   );
 };

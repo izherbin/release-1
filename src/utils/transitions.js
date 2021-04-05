@@ -8,17 +8,14 @@ const transitionStyles = {
   exited: { opacity: 0 },
 };
 
-export const Fade = ({ in: inProp, children, dur }) => {
-  const duration = dur || 100;
-
+export const Fade = ({ in: inProp, children, dur = 100 }) => {
   const defaultStyle = {
-    // display: 'flex',
-    transition: `opacity ${duration}ms ease-in-out`,
+    transition: `opacity ${dur}ms ease-in-out`,
     opacity: 0,
   };
 
   return (
-    <Transition in={inProp} timeout={duration}>
+    <Transition in={inProp} timeout={dur}>
       {(state) => (
         <div
           style={{

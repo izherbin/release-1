@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { LoadingIndicator } from 'components/UI/LoadingIndicator';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {
     display: 'flex',
   },
@@ -12,8 +12,9 @@ const useStyles = makeStyles(() => ({
     left: '0',
     width: '100%',
     height: '100%',
-    backgroundColor: '#fff9',
-    borderRadius: '22px',
+    backgroundColor: primary.main,
+    opacity: '0.6',
+    borderRadius: '4px',
     zIndex: 10,
   },
   loadingSpinner: {

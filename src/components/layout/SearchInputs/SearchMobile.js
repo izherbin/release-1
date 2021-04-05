@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Search } from 'components/UI/Search';
 import { Filter } from 'components/UI/Filter';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     display: 'flex',
-    position: 'relative',
   },
   filter: {
-    position: 'absolute',
-    right: '0',
+    zIndex: 1,
   },
 }));
 

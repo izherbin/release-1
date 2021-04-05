@@ -1,12 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableIndex } from 'components/layout/SearchTable/TableEls/TableIndex';
-import { modPrice } from 'utils/modPrice';
-import { TableGrowth } from 'components/layout/SearchTable/TableEls/TableGrowth';
-import { TableAnomaly } from 'components/layout/SearchTable/TableEls/TableAnomaly';
-import { TableDifficulty } from 'components/layout/SearchTable/TableEls/TableDifficulity/TableDifficulty';
-import { TableSave } from 'components/layout/SearchTable/TableEls/TableSave/TableSave';
-import { TableSeason } from 'components/layout/SearchTable/TableEls/TableSeason';
+import { tableElements } from 'components/layout/SearchTable/TableEls/tableElements';
 
 const useStyles = makeStyles(({ palette: { primary }, breakpoints }) => ({
   container: {
@@ -42,18 +36,8 @@ export const TableEl = ({ isPage, data, sizes, index, arrLength }) => {
     sizes,
     countLast,
   });
-  const { niche, volume, trend } = data;
 
-  const content = [
-    <TableIndex isPage={isPage} index={index} />,
-    niche,
-    modPrice(volume),
-    <TableGrowth data={data} />,
-    <TableSeason trend={trend} />,
-    <TableAnomaly data={data} />,
-    <TableDifficulty data={data} />,
-    <TableSave />,
-  ];
+  const content = tableElements({ ...data }, isPage, index);
 
   const checkIndex = () => {
     if (countBeforeLast) return opacity60;

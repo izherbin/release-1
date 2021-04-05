@@ -1,19 +1,31 @@
 import React, { useReducer, createContext } from 'react';
 import { toggleReducer } from 'components/state/reducers/toggleReducer';
+import { MENU_OPEN, RESET } from 'components/state/constants';
 
 export const ToggleContext = createContext();
 
 const ToggleContextProvider = ({ children }) => {
   const [toggleState, dispatch] = useReducer(toggleReducer, {
-    toggled: false,
+    toggledMenu: false,
+    dimmed: false,
   });
 
-  const resetToggle = (e) => {
-    const target = e.target.id;
+  const menuHandler = (e) => {
+    const { id } = e.target;
 
-    if (target === 'Россия') return;
+    if (id === 'Россия') return;
 
-    if (toggleState.toggled) dispatch({ initial: 'reset' });
+    dispatch({ type: MENU_OPEN });
+  };
+
+  const resetHandler = (e) => {
+    const { id } = e.target;
+
+    const exceptions = ['Регион', 'Инфо', 'Россия', 'Фильтр', 'Иконка'];
+
+    if (exceptions.includes(id)) return;
+
+    dispatch({ type: RESET });
   };
 
   return (
@@ -21,7 +33,8 @@ const ToggleContextProvider = ({ children }) => {
       value={{
         toggleState,
         dispatch,
-        resetToggle,
+        menuHandler,
+        resetHandler,
       }}
     >
       {children}
