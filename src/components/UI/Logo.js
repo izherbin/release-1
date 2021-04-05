@@ -15,7 +15,7 @@ export const Logo = ({ style = '' }) => {
   const { link } = useStyles();
 
   return (
-    <a href="url" className={`${link}`}>
+    <a href="/" className={`${link}`}>
       <img src="images/logo.svg" alt="logo" className={`${style}`} />
     </a>
   );

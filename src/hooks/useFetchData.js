@@ -5,6 +5,7 @@ import { URL } from '../backend/config';
 export const useFetchData = () => {
   const [isRegion, setRegion] = useState(false);
   const [isSearch, setSearch] = useState(false);
+  const [isSort, setSort] = useState(false);
   const [isOrder, setOrder] = useState(false);
   const [isPage, setPage] = useState(1);
 
@@ -22,16 +23,10 @@ export const useFetchData = () => {
     setPage(id);
   };
 
-  const regionHandler = (e) => {
-    console.log('regionHandler -> e', e);
-    setRegion(e);
-  };
+  const regionHandler = (e) => setRegion(e);
 
-  const orderHandler = (e) => {
-    const { value } = e.target;
-
-    setOrder(value);
-  };
+  const setOrderHandler = (up) => setOrder(up);
+  const setSortHandler = (id) => setSort(id);
 
   const searchHandler = (e) => {
     const { value } = e.target;
@@ -42,22 +37,24 @@ export const useFetchData = () => {
 
   useEffect(() => {
     setPage(1);
-  }, [isRegion, isSearch]);
+  }, [isRegion, isSearch, isSort]);
 
   useEffect(() => {
     const perPage = matchesMobile ? '1' : '20';
     const url = `${URL}/data?page=${isPage}&perPage=${perPage}`;
     const withRegion = `&region=${isRegion}`;
     const withSearch = `&search=${isSearch}`;
-    const withOrder = `&sortkey=${isOrder}`;
+    const withSort = `&sortkey=${isSort}`;
+    const withOrder = `&sortorder=${isOrder}`;
     const generateUrl =
       url +
       (isRegion ? withRegion : '') +
       (isSearch ? withSearch : '') +
+      (isSort ? withSort : '') +
       (isOrder ? withOrder : '');
 
     setUrl(generateUrl);
-  }, [isRegion, isSearch, isPage, isOrder]);
+  }, [isRegion, isSearch, isPage, isOrder, isSort]);
 
   useEffect(async () => {
     setLoading(true);
@@ -83,7 +80,7 @@ export const useFetchData = () => {
     pageHandler,
     regionHandler,
     searchHandler,
-    orderHandler,
-    setOrder,
+    setSortHandler,
+    setOrderHandler,
   };
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TableHeaderEl } from 'components/layout/SearchTable/TableHeaderEl';
 import { useOrderToggle } from 'hooks/useOrderToggle';
+import { headerEls } from 'components/layout/SearchTable/headerEls';
 
 const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {
@@ -14,20 +15,10 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   },
 }));
 
-export const TableHeader = ({ sizes }) => {
+export const TableHeader = ({ sizes, ...rest }) => {
   const { container } = useStyles();
-  const { isOrdered, orderHandler, isUp } = useOrderToggle();
-
-  const elemetNames = [
-    '#',
-    'Название отрасли / ниши',
-    'Объем рынка',
-    'Рост за год',
-    'Сезонность',
-    'Аномалии',
-    'Сложность запуска',
-    'Сохраненные',
-  ];
+  const { isOrdered, orderHandler, isUp } = useOrderToggle({ ...rest });
+  const elemetNames = headerEls();
 
   return (
     <div className={container}>
@@ -40,6 +31,7 @@ export const TableHeader = ({ sizes }) => {
           isOrdered={isOrdered}
           orderHandler={orderHandler}
           isUp={isUp}
+          {...rest}
         />
       ))}
     </div>

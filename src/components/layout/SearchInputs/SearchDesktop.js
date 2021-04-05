@@ -18,10 +18,14 @@ const useStyles = makeStyles(({ breakpoints }) => ({
       marginRight: '0',
     },
   },
+  filter: {
+    zIndex: '100',
+    marginRight: '30px',
+  },
 }));
 
 export const SearchDesktop = ({ regions, regionHandler, searchHandler }) => {
-  const { container, search } = useStyles();
+  const { container, search, filter } = useStyles();
   const { matchesTablet } = useMedia();
 
   return (
@@ -33,7 +37,7 @@ export const SearchDesktop = ({ regions, regionHandler, searchHandler }) => {
         <div style={{ marginRight: '30px' }}>
           {!matchesTablet && <SelectRegion regions={regions} regionHandler={regionHandler} />}
         </div>
-        <div style={{ marginRight: '38px' }}>
+        <div className={filter}>
           <Filter regionHandler={regionHandler} regions={regions} />
         </div>
         <Button disableRipple>Найти</Button>

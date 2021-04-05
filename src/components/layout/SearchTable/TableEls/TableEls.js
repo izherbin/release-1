@@ -6,7 +6,7 @@ const useStyles = makeStyles(({ palette: { primary } }) => ({
   container: {},
 }));
 
-export const TableEls = ({ sizes, data, isPage }) => {
+export const TableEls = ({ sizes, data = [], isPage }) => {
   const { container } = useStyles();
   const arrLength = data.length;
 

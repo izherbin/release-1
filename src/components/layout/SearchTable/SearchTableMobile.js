@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { modPrice } from 'utils/modPrice';
-import { TableGrowth } from 'components/layout/SearchTable/TableEls/TableGrowth';
-import { TableAnomaly } from 'components/layout/SearchTable/TableEls/TableAnomaly';
-import { TableDifficulty } from 'components/layout/SearchTable/TableEls/TableDifficulity/TableDifficulty';
-import { TableSave } from 'components/layout/SearchTable/TableEls/TableSave/TableSave';
+import { headerEls } from 'components/layout/SearchTable/headerEls';
+import { tableElements } from 'components/layout/SearchTable/TableEls/tableElements';
+import { LoadingContainer } from 'components/UI/LoadingContainer';
 
-const useStyles = makeStyles(({ palette: { primary, blueLight, blue }, shadows }) => ({
+const useStyles = makeStyles(({ palette: { primary, blueLight }, shadows }) => ({
   container: {
+    position: 'relative',
     height: '276px',
     borderRadius: '4px',
     marginBottom: '30px',
@@ -52,42 +51,32 @@ const useStyles = makeStyles(({ palette: { primary, blueLight, blue }, shadows }
   },
 }));
 
-export const SearchTableMobile = ({ data = [] }) => {
-  const [oneItem = {}] = data;
+export const SearchTableMobile = ({ items = [], isLoading }) => {
+  const [data] = items;
+  const [oneItem] = data || [];
   const { container, header, inner, textBlock, text, icon, content } = useStyles();
 
-  const { niche, volume, trend } = oneItem;
+  const contentObj = tableElements({ ...oneItem });
 
-  const contentObj = [
-    niche,
-    modPrice(volume),
-    <TableGrowth data={{ growth: '+15%' }} />,
-    trend,
-    <TableAnomaly data={{ anomaly: [10, 10] }} />,
-    <TableDifficulty data={{ difficulty: 4.5 }} />,
-    <TableSave />,
-  ];
-  const elemetNames = [
-    'Объем рынка',
-    'Рост за год',
-    'Сезонность',
-    'Аномалии',
-    'Сложность запуска',
-    'Сохраненные',
-  ];
+  const elemetNames = headerEls();
 
   return (
     <div className={container}>
-      <div className={header}>{contentObj[0]}</div>
-      {elemetNames.map((el, i) => (
-        <div className={inner} key={`${i}search`}>
-          <div className={textBlock}>
-            <div className={text}>{el}</div>
-            <img src="icons/info.svg" className={icon} />
-          </div>
-          <div className={content}>{contentObj[i + 1]}</div>
-        </div>
-      ))}
+      <LoadingContainer loading={isLoading} />
+      {!isLoading && (
+        <Fragment>
+          <div className={header}>{contentObj[0]}</div>
+          {elemetNames.map((el, i) => (
+            <div className={inner} key={`${i}search`}>
+              <div className={textBlock}>
+                <div className={text}>{el}</div>
+                <img src="icons/info.svg" className={icon} />
+              </div>
+              <div className={content}>{contentObj[i + 1]}</div>
+            </div>
+          ))}
+        </Fragment>
+      )}
     </div>
   );
 };

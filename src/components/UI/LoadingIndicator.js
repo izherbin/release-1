@@ -18,7 +18,7 @@ const useStyles = makeStyles(({ palette: { accent } }) => ({
   },
 }));
 
-export const LoadingIndicator = ({ size = 40, centered = false, color = '#00695C' }) => {
+export const LoadingIndicator = ({ size = 40, centered = false, color = '#0AEA83' }) => {
   const { spinner, styling, root } = useStyles({ color });
   const styles = {
     classes: { root },

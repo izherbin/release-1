@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 
 const port = process.env.PORT || 8280;
+// const port = process.env.PORT || 3000;
 
 app.get('/regions', cors(corsOptions), async (req, res) => {
   const getData = await getRegions();
@@ -18,22 +19,24 @@ app.get('/regions', cors(corsOptions), async (req, res) => {
 
 app.get('/data', cors(corsOptions), async (req, res) => {
   const {
-    query: { region, page, perPage, search },
+    query: { region, page, perPage, search, sortkey, sortorder },
   } = req;
 
-  const pagesToSlice = (pageNum = page, perPageNum = perPage) => {
-    const start = page === '1' ? 0 : Number(pageNum * Math.round(perPageNum / 2)) + 1;
-    const end = start + Number(perPageNum);
+  const pagesToSlice = (pageNum = Number(page), perPageNum = Number(perPage)) => {
+    const start = pageNum * Math.round(perPageNum) - Math.round(perPageNum);
+    const end = start + perPageNum;
 
     return [start, end];
   };
 
-  const [start, end] = pagesToSlice();
+  const [start = 0, end = 19] = pagesToSlice();
   const { res: data, arrLength: length } = await getTableRows(
     search || null,
     region || null,
     start,
     end,
+    sortkey || null,
+    sortorder || null,
   );
 
   res.status(200).send([data, length]);
