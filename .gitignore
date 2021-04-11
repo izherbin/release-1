@@ -13,3 +13,9 @@ readme.md
 node_modules
 .coverage
 .env
+
+nohup.out
+sizes
+src/archive_26032021_1656.zip
+src/backend/getTableRows.js.b
+src/backend/workspace.code-workspace
