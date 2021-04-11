@@ -42,4 +42,6 @@ app.get('/data', cors(corsOptions), async (req, res) => {
   res.status(200).send([data, length]);
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Сервер backend запущен на порту ${port}...`)
+})

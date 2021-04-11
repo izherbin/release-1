@@ -1,4 +1,4 @@
-import { requests } from './models/requests.js';
+import { requests_ } from './models/requests_.js';
 import { db } from './db.js';
 
 const MONTHS_IN_YEAR = 12;
@@ -13,28 +13,31 @@ export const getTableRows = async function (expr, region, begin, end, sortkey, s
     nameniche: { $regex: searchniche },
     namereg: { $regex: searchreg },
   };
-  const arr = await requests.find(filter);
+  // console.log("~ filter", filter);
+  const arr = await requests_.find(filter);      //* Запрос к БД
 
   // let arrLength = await requests.find(filter).countDocuments();
 
   const res = [];
-  console.log('До редьюса:  ', timestamp());
+  // console.log('~ arr.length', arr.length);
+  // console.log('~ arr[0].nameniche', arr[0].nameniche);
+  // console.log('До редьюса:  ', timestamp());
   const reduced = new reduceResult(arr);
-  console.log('После редьюса:  ', timestamp());
-  console.log('~ reduced.length', reduced.length);
-  console.log('~ reduced[0].nameniche', reduced[0].nameniche);
+  // console.log('После редьюса:  ', timestamp());
+  // console.log('~ reduced.length', reduced.length);
+  // console.log('~ reduced[0].nameniche', reduced[0].nameniche);
   const arrLength = reduced.length;
 
   const sliced = reduced.slice(isNaN(begin) ? undefined : begin, isNaN(end) ? undefined : end);
-  console.log('~ begin', isNaN(begin) ? undefined : begin);
-  console.log('~ end', isNaN(end) ? undefined : end);
-  console.log('~ arrLength', arrLength);
-  console.log('~ sliced.length', sliced.length);
-  console.log('~ sliced[0].nameniche', sliced[0].nameniche);
+  // console.log('~ begin', isNaN(begin) ? undefined : begin);
+  // console.log('~ end', isNaN(end) ? undefined : end);
+  // console.log('~ arrLength', arrLength);
+  // console.log('~ sliced.length', sliced.length);
+  // console.log('~ sliced[0].nameniche', sliced[0].nameniche);
 
   sliced.map((_, i) => {
-    console.log('~ i = ', i);
-    console.log('~ sliced[i].nameniche', sliced[i].nameniche);
+    // console.log('~ i = ', i);
+    // console.log('~ sliced[i].nameniche', sliced[i].nameniche);
     res.push({
       number: i + 1,
       niche: sliced[i].nameniche,
@@ -47,10 +50,10 @@ export const getTableRows = async function (expr, region, begin, end, sortkey, s
   // console.log("~ res.length", res.length);
   // console.log("~ arr.length", arr.length);
 
-  console.log('~ res[0].niche', res[0].niche);
+  // console.log('~ res[0].niche', res[0].niche);
   res.sort((a, b) => compareRows(a, b, sortkey, sortorder));
-  console.log('~ res[0].niche', res[0].niche);
-  console.log('~ res[0].volume', res[0].volume);
+  // console.log('~ res[0].niche', res[0].niche);
+  // console.log('~ res[0].volume', res[0].volume);
   return { res, arrLength };
 };
 
